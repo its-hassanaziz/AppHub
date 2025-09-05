@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GameHub Games - Premium Digital Gaming Collection">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>GameHub Games - Premium Digital Collection</title>
+
+    <!-- Optimized Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-glow: #667eea;
+            --secondary-glow: #764ba2;
+            --accent-glow: #f093fb;
+            --success-glow: #4facfe;
+            --warning-glow: #f6d365;
+            --danger-glow: #ff6b6b;
+            --neon-blue: #00f5ff;
+            --neon-pink: #ff006e;
+            --neon-green: #39ff14;
+            --neon-purple: #bf00ff;
+            --cyber-orange: #ff9500;
+            --quantum-gold: #ffd700;
+            --matrix-red: #ff0040;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-glass: rgba(0, 0, 0, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #475569;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --glow-primary: rgba(102, 126, 234, 0.5);
+            --glow-secondary: rgba(118, 75, 162, 0.5);
+        }
+
+        body {
+            font-family: 'Rajdhani', 'Arial', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .orbitron {
+            font-family: 'Orbitron', 'Courier New', monospace;
+        }
+
+        .exo {
+            font-family: 'Exo 2', 'Arial', sans-serif;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-green), var(--neon-purple));
+            background-size: 400% 100%;
+            animation: rainbow-flow 3s linear infinite;
+        }
+
+        @keyframes rainbow-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+        }
+
+        .gaming-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .gaming-logo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
+            border-radius: 12px;
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .gaming-logo:hover::before {
+            opacity: 0.7;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before {
+            opacity: 0.2;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: var(--neon-blue);
+            padding: 0.75rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 245, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: var(--bg-secondary);
+            border: 10px solid rgba(0, 0, 0, 0.7);
+            border-top: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.show {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-menu a:hover::before {
+            width: 4px;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--bg-glass);
+            transform: translateX(10px);
+            color: var(--neon-blue);
+        }
+
+        /* Holographic Effect */
+        .holographic {
+            background: linear-gradient(45deg, 
+                var(--neon-blue) 0%, 
+                var(--neon-pink) 25%, 
+                var(--neon-green) 50%, 
+                var(--neon-purple) 75%, 
+                var(--neon-blue) 100%);
+            background-size: 400% 400%;
+            animation: holographic-shift 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes holographic-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 65px;
+            min-height: calc(100vh - 80px);
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 2rem 0;
+        }
+
+        /* Games Section */
+        .games-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* View Toggle Buttons */
+        .view-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-blue);
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+        }
+
+        /* Games Container */
+        .games-container {
+            margin-top: 3rem;
+            transition: all 0.2s ease;
+        }
+
+        /* Card/Grid View */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 245, 255, 0.15);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #000;
+        }
+
+        .game-content {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .game-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .game-genre {
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .game-features {
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-icon {
+            color: var(--neon-blue);
+        }
+
+        .download-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .game-size {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Badge Styles */
+        .game-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-mod {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+        }
+
+        .badge-updated {
+            background: linear-gradient(135deg, #2ed573, #1dd1a1);
+            color: white;
+        }
+
+        /* List View Styles */
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .game-list-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .game-list-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.1);
+        }
+
+        .game-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #000;
+        }
+
+        .game-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.2);
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .list-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .list-genre {
+            color: var(--neon-blue);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .list-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 4px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .list-features {
+            color: var(--neon-green);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .list-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* View States */
+        .view-list .games-grid {
+            display: none;
+        }
+
+        .view-list .games-list {
+            display: flex;
+        }
+
+        .view-grid .games-list {
+            display: none;
+        }
+
+        .view-grid .games-grid {
+            display: grid;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem 0;
+            }
+
+            .games-section {
+                padding: 0 0.5rem;
+            }
+
+            .view-toggle {
+                position: static;
+                margin: 1rem auto 0;
+                width: fit-content;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .game-thumb {
+                width: 70px;
+                height: 70px;
+            }
+
+            .list-title {
+                font-size: 1rem;
+            }
+
+            .list-meta {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-list-item {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .game-thumb {
+                width: 64px;
+                height: 64px;
+            }
+
+            .toggle-btn {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--neon-blue);
+            color: white;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="gaming-logo">
+                <i class="logo-icon fa fa-gamepad"></i>
+                <span class="orbitron holographic" style="font-size: 1.25rem; font-weight: 700;">GameHub</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><i class="fa-solid fa-house-user"></i> Home</a>
+                <a href="games.html" class="nav-link active"><i class="fa fa-gamepad"></i> Games</a>
+                <a href="blogs.html" class="nav-link"><i class="fa fa-blog"></i> Blogs</a>
+                <a href="index.html#about" class="nav-link"><i class="fa fa-address-card"></i> About</a>
+                <a href="index.html#contact" class="nav-link"><i class="fa fa-headset"></i> Contact Us</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Home</a>
+            <a href="games.html" class="holographic active"><i class="fa fa-gamepad"></i> Games</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <section class="games-section">
+            <!-- Section Header with Toggle -->
+            <div class="section-header animate-fade-in">
+                <h1 class="section-title holographic">FEATURED GAMES</h1>
+                <p class="section-description">
+                    Handpicked digital masterpieces from the gaming multiverse. Experience premium entertainment curated by our quantum-enhanced selection algorithms.
+                </p>
+                
+                <!-- View Toggle Buttons -->
+                <div class="view-toggle">
+                    <button class="toggle-btn" id="listViewBtn">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </button>
+                    <button class="toggle-btn" id="gridViewBtn">
+                        <i class="fas fa-th-large"></i>
+                        <span>Cards</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Games Container -->
+            <div class="games-container" id="gamesContainer">
+                <!-- List View -->
+                <div class="games-list" id="gamesList">
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.1s">
+                        <div class="game-thumb">
+                            <img src="Images/Index/g1.jpeg" alt="GTA Vice City" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">GTA Vice City</h3>
+                            <div class="list-genre">Action</div>
+                            <div class="list-meta">
+                                <span>v2.5.2</span>
+                                <span>45.2 GB</span>
+                            </div>
+                            <div class="list-features">Unlimited Money</div>
+                        </div>
+                        <div class="list-badge badge-mod">MOD</div>
+                        <a href="gtavc.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.2s">
+                        <div class="game-thumb">
+                            <img src="Images/Index/g2.jpeg" alt="Call Of Duty" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Call Of Duty</h3>
+                            <div class="list-genre">Action</div>
+                            <div class="list-meta">
+                                <span>v1.8.5</span>
+                                <span>32.1 GB</span>
+                            </div>
+                            <div class="list-features">Premium Unlocked</div>
+                        </div>
+                        <div class="list-badge badge-updated">UPDATED</div>
+                        <a href="call-of-duty.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.3s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="Spotify Premium Mod" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Spotify Premium Mod</h3>
+                            <div class="list-genre">Music</div>
+                            <div class="list-meta">
+                                <span>v8.7.30</span>
+                                <span>38.7 MB</span>
+                            </div>
+                            <div class="list-features">Ad-Free, Unlimited Skips</div>
+                        </div>
+                        <div class="list-badge badge-mod">MOD</div>
+                        <a href="spotify.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.4s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="Capcut Desktop" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Capcut Desktop</h3>
+                            <div class="list-genre">Video Editor</div>
+                            <div class="list-meta">
+                                <span>v3.2.1</span>
+                                <span>285 MB</span>
+                            </div>
+                            <div class="list-features">Pro Features Unlocked</div>
+                        </div>
+                        <div class="list-badge badge-updated">UPDATED</div>
+                        <a href="capcutDesktop.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.5s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="EA Sports FC 25" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">EA Sports FC 25</h3>
+                            <div class="list-genre">Sports</div>
+                            <div class="list-meta">
+                                <span>v1.0.8</span>
+                                <span>4.2 GB</span>
+                            </div>
+                            <div class="list-features">Ultimate Team Coins</div>
+                        </div>
+                        <div class="list-badge badge-mod">MOD</div>
+                        <a href="EASports.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.6s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="Capcut Premium Mod" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Capcut Premium Mod</h3>
+                            <div class="list-genre">Video Editor</div>
+                            <div class="list-meta">
+                                <span>v11.2.0</span>
+                                <span>120 MB</span>
+                            </div>
+                            <div class="list-features">All Filters & Effects</div>
+                        </div>
+                        <div class="list-badge badge-mod">MOD</div>
+                        <a href="capcut.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.7s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="ChatGPT 5" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">ChatGPT 5</h3>
+                            <div class="list-genre">AI Assistant</div>
+                            <div class="list-meta">
+                                <span>v5.0.1</span>
+                                <span>95 MB</span>
+                            </div>
+                            <div class="list-features">Unlimited Queries</div>
+                        </div>
+                        <div class="list-badge badge-updated">UPDATED</div>
+                        <a href="chatgpt.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.8s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="Grammarly" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Grammarly</h3>
+                            <div class="list-genre">Productivity</div>
+                            <div class="list-meta">
+                                <span>v1.5.77</span>
+                                <span>180 MB</span>
+                            </div>
+                            <div class="list-features">Premium Features</div>
+                        </div>
+                        <div class="list-badge badge-mod">MOD</div>
+                        <a href="grammerly.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+
+                    <div class="game-list-item animate-fade-in" style="animation-delay: 0.9s">
+                        <div class="game-thumb">
+                            <img src="Images/GTA Vice City/p7.jpeg" alt="Canva" loading="lazy">
+                        </div>
+                        <div class="game-info">
+                            <h3 class="list-title">Canva</h3>
+                            <div class="list-genre">Design</div>
+                            <div class="list-meta">
+                                <span>v2.221.0</span>
+                                <span>150 MB</span>
+                            </div>
+                            <div class="list-features">Pro Templates Unlocked</div>
+                        </div>
+                        <div class="list-badge badge-updated">UPDATED</div>
+                        <a href="canva.html" class="download-btn" style="margin-left: 12px;">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Grid View -->
+                <div class="games-grid" id="gamesGrid">
+                    <!-- Game Card 1 -->
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.1s">
+                        <img src="Images/Index/g1.jpeg" alt="GTA Vice City" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-mod">MOD</div>
+                            <h3 class="game-title">GTA Vice City</h3>
+                            <div class="game-genre">Action</div>
+                            <div class="game-meta">
+                                <span>v2.5.2</span>
+                                <span>45.2 GB</span>
+                            </div>
+                            <div class="game-features">Unlimited Money</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>2.3M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">45.2 GB</span>
+                                <a href="gtavc.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 2 -->
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.2s">
+                        <img src="Images/Index/g2.jpeg" alt="Call Of Duty" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-updated">UPDATED</div>
+                            <h3 class="game-title">Call Of Duty</h3>
+                            <div class="game-genre">Action</div>
+                            <div class="game-meta">
+                                <span>v1.8.5</span>
+                                <span>32.1 GB</span>
+                            </div>
+                            <div class="game-features">Premium Unlocked</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>1.8M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.7</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">32.1 GB</span>
+                                <a href="call-of-duty.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 3 -->
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.3s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="Spotify Premium Mod" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-mod">MOD</div>
+                            <h3 class="game-title">Spotify Premium Mod</h3>
+                            <div class="game-genre">Music</div>
+                            <div class="game-meta">
+                                <span>v8.7.30</span>
+                                <span>38.7 MB</span>
+                            </div>
+                            <div class="game-features">Ad-Free, Unlimited Skips</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>3.1M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.9</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">38.7 MB</span>
+                                <a href="spotify.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.4s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="Capcut Desktop" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-updated">UPDATED</div>
+                            <h3 class="game-title">Capcut Desktop</h3>
+                            <div class="game-genre">Video Editor</div>
+                            <div class="game-meta">
+                                <span>v3.2.1</span>
+                                <span>285 MB</span>
+                            </div>
+                            <div class="game-features">Pro Features Unlocked</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>2.5M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.6</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">285 MB</span>
+                                <a href="capcutDesktop.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.5s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="EA Sports FC 25" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-mod">MOD</div>
+                            <h3 class="game-title">EA Sports FC 25</h3>
+                            <div class="game-genre">Sports</div>
+                            <div class="game-meta">
+                                <span>v1.0.8</span>
+                                <span>4.2 GB</span>
+                            </div>
+                            <div class="game-features">Ultimate Team Coins</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>1.9M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.5</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">4.2 GB</span>
+                                <a href="EASports.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.6s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="Capcut Premium Mod" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-mod">MOD</div>
+                            <h3 class="game-title">Capcut Premium Mod</h3>
+                            <div class="game-genre">Video Editor</div>
+                            <div class="game-meta">
+                                <span>v11.2.0</span>
+                                <span>120 MB</span>
+                            </div>
+                            <div class="game-features">All Filters & Effects</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>4.2M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">120 MB</span>
+                                <a href="capcut.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.7s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="ChatGPT 5" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-updated">UPDATED</div>
+                            <h3 class="game-title">ChatGPT 5</h3>
+                            <div class="game-genre">AI Assistant</div>
+                            <div class="game-meta">
+                                <span>v5.0.1</span>
+                                <span>95 MB</span>
+                            </div>
+                            <div class="game-features">Unlimited Queries</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>5.8M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.9</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">95 MB</span>
+                                <a href="chatgpt.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.8s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="Grammarly" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-mod">MOD</div>
+                            <h3 class="game-title">Grammarly</h3>
+                            <div class="game-genre">Productivity</div>
+                            <div class="game-meta">
+                                <span>v1.5.77</span>
+                                <span>180 MB</span>
+                            </div>
+                            <div class="game-features">Premium Features</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>2.1M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.4</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">180 MB</span>
+                                <a href="grammerly.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card animate-fade-in" style="animation-delay: 0.9s">
+                        <img src="Images/GTA Vice City/p7.jpeg" alt="Canva" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <div class="game-badge badge-updated">UPDATED</div>
+                            <h3 class="game-title">Canva</h3>
+                            <div class="game-genre">Design</div>
+                            <div class="game-meta">
+                                <span>v2.221.0</span>
+                                <span>150 MB</span>
+                            </div>
+                            <div class="game-features">Pro Templates Unlocked</div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-download stat-icon"></i>
+                                    <span>3.7M</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-star stat-icon"></i>
+                                    <span>4.6</span>
+                                </div>
+                            </div>
+                            <div class="download-section">
+                                <span class="game-size">150 MB</span>
+                                <a href="canva.html" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="games.html">Games</a>
+                <a href="blogs.html">Blogs</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p style="color: var(--text-secondary);" class="holographic">
+                © 2025 GameHub Neural Network. All rights reserved. Powered by quantum computing.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Device detection function
+        function detectDevice() {
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) 
+                           || window.innerWidth <= 768;
+
+            return isMobile ? "Mobile Device" : "Laptop/Desktop";
+        }
+
+        console.log(detectDevice());
+
+        // View management
+        let currentView = 'auto'; // 'list', 'grid', or 'auto'
+
+        function initializeView() {
+            const deviceType = detectDevice();
+            const container = document.getElementById('gamesContainer');
+            const listBtn = document.getElementById('listViewBtn');
+            const gridBtn = document.getElementById('gridViewBtn');
+
+            // Set default view based on device
+            if (deviceType === "Mobile Device") {
+                setView('list');
+            } else {
+                setView('grid');
+            }
+        }
+
+        function setView(view) {
+            const container = document.getElementById('gamesContainer');
+            const listBtn = document.getElementById('listViewBtn');
+            const gridBtn = document.getElementById('gridViewBtn');
+
+            // Remove existing view classes
+            container.classList.remove('view-list', 'view-grid');
+            listBtn.classList.remove('active');
+            gridBtn.classList.remove('active');
+
+            // Apply new view
+            if (view === 'list') {
+                container.classList.add('view-list');
+                listBtn.classList.add('active');
+                currentView = 'list';
+            } else {
+                container.classList.add('view-grid');
+                gridBtn.classList.add('active');
+                currentView = 'grid';
+            }
+        }
+
+        // Initialize the games page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeView();
+            setupEventListeners();
+            setupScrollEffects();
+        });
+
+        function setupEventListeners() {
+            // View toggle buttons
+            const listBtn = document.getElementById('listViewBtn');
+            const gridBtn = document.getElementById('gridViewBtn');
+
+            if (listBtn) {
+                listBtn.addEventListener('click', () => setView('list'));
+            }
+
+            if (gridBtn) {
+                gridBtn.addEventListener('click', () => setView('grid'));
+            }
+
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('show');
+                });
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (mobileMenuBtn && mobileMenu && 
+                    !mobileMenuBtn.contains(e.target) && 
+                    !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('show');
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (mobileMenu && mobileMenu.classList.contains('show')) {
+                        mobileMenu.classList.remove('show');
+                    }
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (currentView === 'auto') {
+                    initializeView();
+                }
+            });
+        }
+
+        function setupScrollEffects() {
+            let ticking = false;
+            
+            function updateScrollEffects() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        const scrollY = window.scrollY;
+                        const navbar = document.getElementById('navbar');
+                        
+                        if (navbar) {
+                            if (scrollY > 50) {
+                                navbar.classList.add('scrolled');
+                            } else {
+                                navbar.classList.remove('scrolled');
+                            }
+                        }
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', updateScrollEffects, { passive: true });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

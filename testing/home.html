@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub — Explore Games, Apps & Blogs | Home</title>
+    <meta name="description" content="Game Hub brings all your favorites together: explore games, discover apps & tools, and read blogs—all in one place.">
+    <meta name="keywords" content="Game Hub, Games, Apps, Tools, Spotify, Canva, CapCut, ChatGPT, Grammarly, Call of Duty, GTA Vice City, Blogs">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Game Hub — Explore Games, Apps & Blogs">
+    <meta property="og:description" content="Discover games, apps, and blogs from one clean hub.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Images/Index/g1.jpeg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Game Hub — Home">
+    <meta name="twitter:description" content="Explore games, apps & tools, and blogs in one hub.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" as="style">
+    <link rel="preload" href="Images/Index/g1.jpeg" as="image">
+    <link rel="preload" href="Images/Index/g2.jpeg" as="image">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'rajdhani': ['Rajdhani', 'sans-serif'],
+                        'orbitron': ['Orbitron', 'monospace'],
+                    },
+                    colors: {
+                        'pubg-gold': '#f1c40f',
+                        'pubg-gold-dark': '#e6b800',
+                        'pubg-orange': '#ff6b35',
+                        'pubg-dark': '#1a1a1a',
+                        'pubg-dark-light': '#2d2d2d',
+                        'pubg-gray': '#3a3a3a',
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slideInLeft': 'slideInLeft 0.8s ease-out forwards',
+                        'slideInRight': 'slideInRight 0.8s ease-out forwards',
+                        'slideInUp': 'slideInUp 0.8s ease-out forwards',
+                        'slideInDown': 'slideInDown 0.8s ease-out forwards',
+                        'fadeIn': 'fadeIn 0.8s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom PUBG-inspired styles */
+        .pubg-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+        }
+        
+        .pubg-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
+        }
+        
+        .pubg-button {
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .pubg-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.5);
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(241, 196, 15, 0.3); }
+            to { box-shadow: 0 0 20px rgba(241, 196, 15, 0.6); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* Keep menu open when hovering over dropdown container OR menu items */
+        .dropdown:hover .dropdown-menu,
+        .dropdown .dropdown-menu:hover {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            transition-delay: 0s !important;
+        }
+        
+        /* Add padding to dropdown container to bridge hover gap */
+        .dropdown {
+            padding-bottom: 10px;
+        }
+        
+        /* Fix dropdown positioning for rightmost items */
+        .dropdown:nth-last-child(-n+3) .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        
+        /* Ensure dropdowns don't go off screen */
+        @media (max-width: 1024px) {
+            .dropdown:nth-last-child(-n+4) .dropdown-menu {
+                left: auto;
+                right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dropdown .dropdown-menu {
+                left: 0 !important;
+                right: auto !important;
+                width: 100vw;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        .hero-bg-desktop {
+            background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .hero-bg-mobile {
+            background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                        url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Mobile menu toggle */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-pubg-dark text-white font-rajdhani overflow-x-hidden">
+    
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full bg-pubg-dark/95 backdrop-blur-md border-b border-pubg-gold/30 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-pubg-gold rounded-full flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-orbitron font-bold text-pubg-gold">PUBG Mobile</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <div class="dropdown relative">
+                        <a href="#home" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Home
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#games" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Games
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="games.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Games</a>
+                            <a href="call-of-duty.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Call of Duty</a>
+                            <a href="gtavc.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">GTA Vice City</a>
+                            <a href="EASports.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">EA Sports</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#apps" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Apps & Tools
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="spotify.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Spotify</a>
+                            <a href="canva.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Canva</a>
+                            <a href="capcut.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">CapCut</a>
+                            <a href="chatgpt.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">ChatGPT</a>
+                            <a href="grammerly.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Grammarly</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#blogs" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Blogs
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#about" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            About
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button class="md:hidden relative" id="mobile-menu-btn">
+                    <!-- Hamburger icon -->
+                    <svg class="w-6 h-6 hamburger-icon transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <!-- Cross icon -->
+                    <svg class="w-6 h-6 cross-icon absolute top-0 left-0 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden mobile-menu fixed top-16 left-0 w-full h-screen bg-pubg-dark/95 backdrop-blur-md" id="mobile-menu">
+            <div class="p-4 space-y-2">
+                <div class="mobile-dropdown">
+                    <a href="#home" class="block text-white hover:text-pubg-gold transition-colors py-3">Home</a>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="#games" class="flex-1 text-white hover:text-pubg-gold transition-colors py-3">Games</a>
+                        <button class="mobile-dropdown-btn text-white hover:text-pubg-gold transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="games.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">All Games</a>
+                        <a href="call-of-duty.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Call of Duty</a>
+                        <a href="gtavc.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">GTA Vice City</a>
+                        <a href="EASports.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">EA Sports</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="#apps" class="flex-1 text-white hover:text-pubg-gold transition-colors py-3">Apps & Tools</a>
+                        <button class="mobile-dropdown-btn text-white hover:text-pubg-gold transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="spotify.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Spotify</a>
+                        <a href="canva.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Canva</a>
+                        <a href="capcut.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">CapCut</a>
+                        <a href="chatgpt.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">ChatGPT</a>
+                        <a href="grammerly.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Grammarly</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <a href="#blogs" class="block text-white hover:text-pubg-gold transition-colors py-3">Blogs</a>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <a href="#about" class="block text-white hover:text-pubg-gold transition-colors py-3">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="lg:flex lg:items-center lg:space-x-12">
+                <!-- Left: Content -->
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h1 class="text-4xl lg:text-6xl font-orbitron font-bold mb-6 animate-on-scroll">
+                        <span class="text-pubg-gold">Game Hub</span><br>
+                        <span class="text-white">All Your Favorites in One Place</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 animate-on-scroll">
+                        Explore top games, powerful apps, creative tools, and curated blogs—fast access to everything from one clean home page.
+                    </p>
+                    <div class="flex flex-wrap gap-3 animate-on-scroll">
+                        <a href="games.html"><button class="pubg-button text-pubg-dark font-bold py-3 px-6 rounded hover:scale-105 transition-all">Browse Games</button></a>
+                        <a href="#apps"><button class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded transition-all">Apps & Tools</button></a>
+                        <a href="blogs.html"><button class="bg-pubg-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded transition-all">Read Blogs</button></a>
+                    </div>
+                </div>
+                
+                <!-- Right: Feature Cards -->
+                <div class="lg:w-1/2">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3">
+                        <a href="games.html" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fas fa-gamepad"></i></div>
+                            <h3 class="font-bold mb-2">Games</h3>
+                            <p class="text-sm text-gray-400">Call of Duty, GTA Vice City, EA Sports…</p>
+                        </a>
+                        <a href="#apps" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <h3 class="font-bold mb-2">Apps & Tools</h3>
+                            <p class="text-sm text-gray-400">Spotify, Canva, CapCut, ChatGPT, Grammarly</p>
+                        </a>
+                        <a href="blogs.html" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fa-solid fa-newspaper"></i></div>
+                            <h3 class="font-bold mb-2">Blogs</h3>
+                            <p class="text-sm text-gray-400">Guides, updates, tutorials</p>
+                        </a>
+                        <a href="blogs-view.html" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fa-solid fa-star"></i></div>
+                            <h3 class="font-bold mb-2">Featured</h3>
+                            <p class="text-sm text-gray-400">Popular picks across the hub</p>
+                        </a>
+                        <a href="games.html#new" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fa-solid fa-bolt"></i></div>
+                            <h3 class="font-bold mb-2">New & Trending</h3>
+                            <p class="text-sm text-gray-400">What’s hot right now</p>
+                        </a>
+                        <a href="#about" class="pubg-card p-6 rounded hover:scale-105 transition-all cursor-pointer animate-on-scroll block">
+                            <div class="text-pubg-gold text-2xl mb-2"><i class="fa-solid fa-circle-info"></i></div>
+                            <h3 class="font-bold mb-2">About</h3>
+                            <p class="text-sm text-gray-400">Learn about this project</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Games Section -->
+    <section id="games" class="py-20 pubg-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-10 text-center animate-on-scroll">Popular Games</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="call-of-duty.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Call of Duty/bg.jpeg" alt="Call of Duty" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold">Call of Duty</h3>
+                        <p class="text-sm text-gray-400">Shooter • Action</p>
+                    </div>
+                </a>
+                <a href="gtavc.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/GTA Vice City/bg.jpeg" alt="GTA Vice City" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold">GTA Vice City</h3>
+                        <p class="text-sm text-gray-400">Open World • Classic</p>
+                    </div>
+                </a>
+                <a href="EASports.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Index/g1.jpeg" alt="EA Sports" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold">EA Sports</h3>
+                        <p class="text-sm text-gray-400">Sports • Competitive</p>
+                    </div>
+                </a>
+                <a href="games.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Index/g2.jpeg" alt="All Games" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold">Browse All Games</h3>
+                        <p class="text-sm text-gray-400">See more →</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Apps & Tools Section -->
+    <section id="apps" class="py-20 bg-pubg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-10 text-center animate-on-scroll">Apps & Tools</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <a href="spotify.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <img src="Images/Spotify/c2.png" alt="Spotify" class="w-16 h-16 object-contain mx-auto mb-3">
+                    <h3 class="font-bold mb-1">Spotify</h3>
+                    <p class="text-sm text-gray-400">Music & Podcasts</p>
+                </a>
+                <a href="canva.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <img src="Images/Canva/img2.jpg" alt="Canva" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
+                    <h3 class="font-bold mb-1">Canva</h3>
+                    <p class="text-sm text-gray-400">Design & Templates</p>
+                </a>
+                <a href="capcut.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <img src="Images/Capcut/img2.jpg" alt="CapCut" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
+                    <h3 class="font-bold mb-1">CapCut</h3>
+                    <p class="text-sm text-gray-400">Video Editing</p>
+                </a>
+                <a href="chatgpt.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <img src="Images/ChatGPT/Chat-gpt.jpeg" alt="ChatGPT" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
+                    <h3 class="font-bold mb-1">ChatGPT</h3>
+                    <p class="text-sm text-gray-400">AI Assistant</p>
+                </a>
+                <a href="grammerly.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <img src="Images/Grammarly/img1.png" alt="Grammarly" class="w-16 h-16 object-contain mx-auto mb-3">
+                    <h3 class="font-bold mb-1">Grammarly</h3>
+                    <p class="text-sm text-gray-400">Writing Assistant</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Section -->
+    <section id="featured" class="py-20 pubg-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-10 text-center animate-on-scroll">Featured Picks</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="spotify.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block">
+                    <div class="flex items-center gap-4">
+                        <img src="Images/Spotify/c2.png" class="w-14 h-14 object-contain" alt="Spotify">
+                        <div>
+                            <h3 class="font-bold">Spotify</h3>
+                            <p class="text-sm text-gray-400">Stream while you game</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="canva.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block">
+                    <div class="flex items-center gap-4">
+                        <img src="Images/Canva/img2.jpg" class="w-14 h-14 object-cover rounded" alt="Canva">
+                        <div>
+                            <h3 class="font-bold">Canva</h3>
+                            <p class="text-sm text-gray-400">Thumbnails & artwork</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="blogs.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block">
+                    <div class="flex items-center gap-4">
+                        <img src="Images/Index/g1.jpeg" class="w-14 h-14 object-cover rounded" alt="Blogs">
+                        <div>
+                            <h3 class="font-bold">Blogs</h3>
+                            <p class="text-sm text-gray-400">Guides, news, insights</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-pubg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-6 animate-on-scroll">About Game Hub</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto animate-on-scroll">A simple, fast landing page that connects your games, apps, and blogs. Use the top navigation or the featured sections to jump anywhere.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="pubg-card p-6 rounded animate-on-scroll">
+                    <h3 class="font-bold text-xl mb-2">Why Game Hub?</h3>
+                    <p class="text-gray-300 text-sm">One link for everything. No clutter, no confusion—just quick access to the content you update most.</p>
+                </div>
+                <div class="pubg-card p-6 rounded animate-on-scroll">
+                    <h3 class="font-bold text-xl mb-2">What’s Inside</h3>
+                    <p class="text-gray-300 text-sm">Popular games, creation tools, and reading lists—already wired to your existing pages.</p>
+                </div>
+                <div class="pubg-card p-6 rounded animate-on-scroll">
+                    <h3 class="font-bold text-xl mb-2">Easy to Extend</h3>
+                    <p class="text-gray-300 text-sm">Add more categories anytime—this home adapts without heavy refactors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Explore Section -->
+    <section id="explore" class="py-20 pubg-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-6 animate-on-scroll">Explore More</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto animate-on-scroll">Quick links to popular areas across the hub.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="#games" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <div class="text-3xl text-pubg-gold mb-3"><i class="fas fa-gamepad"></i></div>
+                    <h3 class="font-bold">Games</h3>
+                    <p class="text-sm text-gray-400">Browse popular titles</p>
+                </a>
+                <a href="#apps" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <div class="text-3xl text-pubg-gold mb-3"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3 class="font-bold">Apps & Tools</h3>
+                    <p class="text-sm text-gray-400">Create, edit, and assist</p>
+                </a>
+                <a href="#blogs" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
+                    <div class="text-3xl text-pubg-gold mb-3"><i class="fas fa-newspaper"></i></div>
+                    <h3 class="font-bold">Blogs</h3>
+                    <p class="text-sm text-gray-400">Read guides and updates</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQs Section -->
+    <section id="faqs" class="py-20 bg-pubg-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold text-center mb-12 animate-on-scroll">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item pubg-card rounded animate-on-scroll">
+                    <button class="faq-question w-full text-left p-6 font-bold hover:text-pubg-gold transition-colors flex justify-between items-center">
+                        <span>What is Game Hub?</span>
+                        <span class="faq-icon transition-transform">+</span>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-300">
+                        <p>It's a central landing page that links to your games, apps & tools, and blogs—making navigation simple and fast.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item pubg-card rounded animate-on-scroll">
+                    <button class="faq-question w-full text-left p-6 font-bold hover:text-pubg-gold transition-colors flex justify-between items-center">
+                        <span>Where can I find games and apps?</span>
+                        <span class="faq-icon transition-transform">+</span>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-300">
+                        <p>Use the top navigation or scroll to the Games and Apps & Tools sections above to browse categories and open pages.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item pubg-card rounded animate-on-scroll">
+                    <button class="faq-question w-full text-left p-6 font-bold hover:text-pubg-gold transition-colors flex justify-between items-center">
+                        <span>How often is content updated?</span>
+                        <span class="faq-icon transition-transform">+</span>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-300">
+                        <p>Featured picks and links update as new pages are added. The Blogs section highlights the latest posts.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item pubg-card rounded animate-on-scroll">
+                    <button class="faq-question w-full text-left p-6 font-bold hover:text-pubg-gold transition-colors flex justify-between items-center">
+                        <span>Can I request a new game or tool?</span>
+                        <span class="faq-icon transition-transform">+</span>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-300">
+                        <p>Yes—leave a note via the Blogs page or add a new HTML file following the existing structure. This home page will link to it easily.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item pubg-card rounded animate-on-scroll">
+                    <button class="faq-question w-full text-left p-6 font-bold hover:text-pubg-gold transition-colors flex justify-between items-center">
+                        <span>Who maintains Game Hub?</span>
+                        <span class="faq-icon transition-transform">+</span>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-300">
+                        <p>This project is maintained locally and can be extended by editing the HTML files in the workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blogs Section -->
+    <section id="blogs" class="py-20 pubg-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold text-center mb-12 animate-on-scroll">Latest Blogs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="blogs.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Index/g1.jpeg" alt="Blogs" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">All Blogs</h3>
+                        <p class="text-gray-400 text-sm">Browse categories →</p>
+                    </div>
+                </a>
+                <a href="blogs-view.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Index/g2.jpeg" alt="Featured Blog" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Featured Article</h3>
+                        <p class="text-gray-400 text-sm">Read now →</p>
+                    </div>
+                </a>
+                <a href="blogs.html#updates" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Spotify/bg1.jpeg" alt="Updates" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Updates & News</h3>
+                        <p class="text-gray-400 text-sm">Latest posts →</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-pubg-dark border-t border-pubg-gold/30 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pubg-gold rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-orbitron font-bold text-pubg-gold">Game Hub</h3>
+                            <p class="text-gray-400">All your favorites in one place</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Discover games, apps & tools, and blogs—organized for quick access and easy browsing.
+                    </p>
+                    
+                    <!-- Social Links -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">YouTube</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Discord</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.347-1.051-2.347-2.347s1.05-2.347 2.347-2.347 2.347 1.051 2.347 2.347-1.05 2.347-2.347 2.347zm7.718 0c-1.297 0-2.347-1.051-2.347-2.347s1.05-2.347 2.347-2.347 2.347 1.051 2.347 2.347-1.05 2.347-2.347 2.347z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#games" class="text-gray-400 hover:text-white transition-colors">Games</a></li>
+                        <li><a href="#apps" class="text-gray-400 hover:text-white transition-colors">Apps & Tools</a></li>
+                        <li><a href="#blogs" class="text-gray-400 hover:text-white transition-colors">Blogs</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+                
+                <!-- More Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">More</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#faqs" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="#explore" class="text-gray-400 hover:text-white transition-colors">Explore</a></li>
+                        <li><a href="#blogs" class="text-gray-400 hover:text-white transition-colors">Blogs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-pubg-gold/30 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Game Hub. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
+        const crossIcon = mobileMenuBtn.querySelector('.cross-icon');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            
+            // Toggle icons
+            if (mobileMenu.classList.contains('active')) {
+                // Show cross icon, hide hamburger icon
+                hamburgerIcon.style.opacity = '0';
+                crossIcon.style.opacity = '1';
+            } else {
+                // Show hamburger icon, hide cross icon
+                hamburgerIcon.style.opacity = '1';
+                crossIcon.style.opacity = '0';
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                // Reset to hamburger icon
+                hamburgerIcon.style.opacity = '1';
+                crossIcon.style.opacity = '0';
+            });
+        });
+        
+        // Mobile dropdown functionality
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = btn.closest('.mobile-dropdown');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = btn.querySelector('i');
+                
+                // Close other mobile dropdowns
+                document.querySelectorAll('.mobile-dropdown').forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        const otherMenu = otherDropdown.querySelector('.mobile-dropdown-menu');
+                        const otherIcon = otherDropdown.querySelector('i');
+                        if (otherMenu && otherIcon) {
+                            otherMenu.classList.add('hidden');
+                            otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                // Toggle current dropdown
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    menu.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const delay = Array.from(element.parentNode.children).indexOf(element) * 100;
+                    
+                    setTimeout(() => {
+                        // Determine animation direction based on element position
+                        const rect = element.getBoundingClientRect();
+                        const windowWidth = window.innerWidth;
+                        const elementCenter = rect.left + rect.width / 2;
+                        
+                        let animationClass;
+                        if (elementCenter < windowWidth * 0.33) {
+                            animationClass = 'animate-slideInLeft';
+                        } else if (elementCenter > windowWidth * 0.66) {
+                            animationClass = 'animate-slideInRight';
+                        } else {
+                            animationClass = Math.random() > 0.5 ? 'animate-slideInUp' : 'animate-fadeIn';
+                        }
+                        
+                        element.classList.add(animationClass);
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, delay);
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with animation class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentNode;
+                const answer = faqItem.querySelector('.faq-answer');
+                const icon = question.querySelector('.faq-icon');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.querySelector('.faq-answer').classList.add('hidden');
+                        item.querySelector('.faq-icon').textContent = '+';
+                        item.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Toggle current FAQ
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.textContent = '-';
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    answer.classList.add('hidden');
+                    icon.textContent = '+';
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        
+        // Dropdown functionality for mobile
+        document.querySelectorAll('.dropdown > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = link.parentNode;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+        
+        // Parallax effect for hero background (desktop only)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.hero-section');
+                if (parallax) {
+                    const speed = scrolled * 0.5;
+                    parallax.style.backgroundPositionY = speed + 'px';
+                }
+            });
+        }
+        
+        // Preload critical images
+        const preloadImages = [
+            'Images/Index/g1.jpeg',
+            'Images/Index/g2.jpeg'
+        ];
+        
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+        
+        // Lazy loading for gallery images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        
+        // Add loading states for buttons
+        document.querySelectorAll('.pubg-button, .bg-pubg-orange, .bg-gray-600').forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (button.textContent.includes('Download')) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Downloading...';
+                    button.disabled = true;
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            });
+        });
+
+        // Enhanced dropdown functionality with proper hover delays
+        let dropdownTimeouts = new Map();
+
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            function showDropdown() {
+                // Clear any pending hide timeout
+                if (dropdownTimeouts.has(dropdown)) {
+                    clearTimeout(dropdownTimeouts.get(dropdown));
+                    dropdownTimeouts.delete(dropdown);
+                }
+                dropdown.classList.add('active');
+            }
+            
+            function hideDropdown() {
+                // Set a delay before hiding
+                const timeout = setTimeout(() => {
+                    dropdown.classList.remove('active');
+                    dropdownTimeouts.delete(dropdown);
+                }, 500); // 500ms delay
+                
+                dropdownTimeouts.set(dropdown, timeout);
+            }
+            
+            // Mouse enter events
+            dropdown.addEventListener('mouseenter', showDropdown);
+            if (menu) {
+                menu.addEventListener('mouseenter', showDropdown);
+            }
+            
+            // Mouse leave events
+            dropdown.addEventListener('mouseleave', hideDropdown);
+            if (menu) {
+                menu.addEventListener('mouseleave', hideDropdown);
+            }
+        });
+    </script>
+</body>
+</html>
