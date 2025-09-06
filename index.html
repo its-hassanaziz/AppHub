@@ -322,7 +322,13 @@
                     <div class="dropdown relative">
                         <a href="#blogs" class="text-white hover:text-pubg-gold transition-colors flex items-center">
                             Blogs
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
                         </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="#blogs" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Latest Blogs</a>
+                            <a href="blogs.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Blogs</a>
+                            <a href="blogs-view.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Blog Viewer</a>
+                        </div>
                     </div>
                     <div class="dropdown relative">
                         <a href="#contact" class="text-white hover:text-pubg-gold transition-colors flex items-center">
@@ -374,7 +380,17 @@
                 </div>
 
                 <div class="mobile-dropdown">
-                    <a href="#blogs" class="block text-white hover:text-pubg-gold transition-colors py-3">Blogs</a>
+                    <div class="flex items-center justify-between">
+                        <a href="#blogs" class="flex-1 text-white hover:text-pubg-gold transition-colors py-3">Blogs</a>
+                        <button class="mobile-dropdown-btn text-white hover:text-pubg-gold transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="#blogs" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Latest Blogs</a>
+                        <a href="blogs.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">All Blogs</a>
+                        <a href="blogs-view.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Blog Viewer</a>
+                    </div>
                 </div>
 
                 <div class="mobile-dropdown">
@@ -409,142 +425,85 @@
         </div>
     </section>
     
-    <!-- Popular Apps & Tools Section (4x4 grid) -->
-    <section id="apps" class="min-h-screen py-20 bg-pubg-dark flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-10 text-center animate-on-scroll">Popular Apps and Tools</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Row 1 -->
-                <a href="spotify.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/Spotify/c2.png" alt="Spotify" class="w-16 h-16 object-contain mx-auto mb-3">
-                    <h3 class="font-bold mb-2">Spotify</h3>
-                    <p class="text-sm text-gray-400 mb-3">Music & Podcasts</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Get</button>
-                </a>
-                <a href="canva.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/Canva/img2.jpg" alt="Canva" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
-                    <h3 class="font-bold mb-2">Canva</h3>
-                    <p class="text-sm text-gray-400 mb-3">Design & Templates</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Open</button>
-                </a>
-                <a href="capcut.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/Capcut/img2.jpg" alt="CapCut" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
-                    <h3 class="font-bold mb-2">CapCut</h3>
-                    <p class="text-sm text-gray-400 mb-3">Video Editing</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Get</button>
-                </a>
-                <a href="chatgpt.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/ChatGPT/Chat-gpt.jpeg" alt="ChatGPT" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
-                    <h3 class="font-bold mb-2">ChatGPT</h3>
-                    <p class="text-sm text-gray-400 mb-3">AI Assistant</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Open</button>
-                </a>
-                
-                <!-- Row 2 -->
-                <a href="grammerly.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/Grammarly/img1.png" alt="Grammarly" class="w-16 h-16 object-contain mx-auto mb-3">
-                    <h3 class="font-bold mb-2">Grammarly</h3>
-                    <p class="text-sm text-gray-400 mb-3">Writing Assistant</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Get</button>
-                </a>
-                <a href="telegram.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fab fa-telegram-plane text-white text-2xl"></i>
+    <!-- Popular Apps & Tools (condensed 4 cards) -->
+    <section id="apps" class="py-20 bg-pubg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-orbitron font-bold text-pubg-gold mb-12 text-center animate-on-scroll">Popular Apps & Tools</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Spotify -->
+                <a href="spotify.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Spotify/bg1.jpeg" alt="Spotify" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Spotify</h3>
+                        <p class="text-gray-400 text-sm mb-3">Stream music & podcasts with personalized recommendations.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Open →</button>
                     </div>
-                    <h3 class="font-bold mb-2">Telegram</h3>
-                    <p class="text-sm text-gray-400 mb-3">Messaging App</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Get</button>
                 </a>
-                <a href="capcutDesktop.html" class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center">
-                    <img src="Images/Capcut/img2.jpg" alt="CapCut Desktop" class="w-16 h-16 object-cover mx-auto mb-3 rounded">
-                    <h3 class="font-bold mb-2">CapCut Desktop</h3>
-                    <p class="text-sm text-gray-400 mb-3">Desktop Video Editor</p>
-                    <button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Get</button>
-                </a>
-                <div class="pubg-card p-6 rounded hover:scale-105 transition-all animate-on-scroll block text-center" id="pubg">
-                    <div class="w-16 h-16 bg-pubg-orange rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-gamepad text-white text-2xl"></i>
+                <!-- Canva -->
+                <a href="canva.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/Canva/bg.jpg" alt="Canva" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Canva</h3>
+                        <p class="text-gray-400 text-sm mb-3">Design graphics, videos & slides with drag‑and‑drop ease.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Design →</button>
                     </div>
-                    <h3 class="font-bold mb-2">PUBG Mobile</h3>
-                    <p class="text-sm text-gray-400 mb-3">Battle Royale Game</p>
-                    <a href="PUBG/pubg.html" class="block"><button class="pubg-button text-pubg-dark font-bold py-2 px-4 rounded text-sm w-full">Play</button></a>
-                </div>
-                
+                </a>
+                <!-- ChatGPT -->
+                <a href="chatgpt.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="Images/ChatGPT/bg1.jpeg" alt="ChatGPT" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">ChatGPT</h3>
+                        <p class="text-gray-400 text-sm mb-3">Get instant help: ideas, answers, writing & learning support.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Chat →</button>
+                    </div>
+                </a>
+                <!-- All Apps CTA -->
+                <a href="apps.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block bg-pubg-gold/5 border-2 border-pubg-gold/40">
+                    <div class="p-6 h-full flex flex-col justify-center items-center text-center">
+                        <div class="text-pubg-gold text-4xl mb-4"><i class="fas fa-layer-group"></i></div>
+                        <h3 class="text-lg font-bold mb-2 text-pubg-gold">All Apps & Tools</h3>
+                        <p class="text-gray-300 text-sm mb-4">Browse the full library of free tools and platforms.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Explore →</button>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
     
-    <!-- Latest Blogs Section -->
-    <section id="blogs" class="min-h-screen py-20 pubg-gradient flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <!-- Latest Blogs (condensed 4 cards) -->
+    <section id="blogs" class="py-20 pubg-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-orbitron font-bold text-pubg-gold text-center mb-12 animate-on-scroll">Latest Blogs</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Row 1 -->
-                <a href="blog-post-1.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="App Review" class="w-full h-32 object-cover">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="blogs-view.html?id=blog-post-1" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="Best Free Apps 2025" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-bold mb-2">Best Free Apps 2025</h3>
-                        <p class="text-gray-400 text-sm mb-3">Discover the top free apps that are changing the game this year...</p>
+                        <p class="text-gray-400 text-sm mb-3">Top free apps reshaping productivity, creativity & workflow this year.</p>
                         <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
                 </a>
-                <a href="blog-post-2.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=200&fit=crop" alt="Productivity" class="w-full h-32 object-cover">
+                <a href="blogs-view.html?id=blog-post-2" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=200&fit=crop" alt="Productivity Hacks" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-bold mb-2">Productivity Hacks</h3>
-                        <p class="text-gray-400 text-sm mb-3">10 tools that will boost your productivity without breaking the bank...</p>
+                        <p class="text-gray-400 text-sm mb-3">10 free tools & tactics to boost daily output without burnout.</p>
                         <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
                 </a>
-                <a href="blog-post-3.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Design Tips" class="w-full h-32 object-cover">
+                <a href="blogs-view.html?id=blog-post-3" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Design Like a Pro" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-bold mb-2">Design Like a Pro</h3>
-                        <p class="text-gray-400 text-sm mb-3">Master Canva and other design tools with these expert tips...</p>
+                        <p class="text-gray-400 text-sm mb-3">Master Canva & visual content principles with practical tricks.</p>
                         <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
                 </a>
-                <a href="blog-post-4.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="Tech News" class="w-full h-32 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2">Tech News Weekly</h3>
-                        <p class="text-gray-400 text-sm mb-3">Stay updated with the latest in technology and app releases...</p>
-                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
-                    </div>
-                </a>
-                
-                <!-- Row 2 -->
-                <a href="blog-post-5.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=200&fit=crop" alt="Gaming" class="w-full h-32 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2">PUBG Mobile Guide</h3>
-                        <p class="text-gray-400 text-sm mb-3">Master the battleground with these pro tips and strategies...</p>
-                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
-                    </div>
-                </a>
-                <a href="blog-post-6.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Video Editing" class="w-full h-32 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2">Video Editing Basics</h3>
-                        <p class="text-gray-400 text-sm mb-3">Learn CapCut from scratch and create stunning videos...</p>
-                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
-                    </div>
-                </a>
-                <a href="blog-post-7.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
-                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop" alt="AI Tools" class="w-full h-32 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold mb-2">AI Revolution</h3>
-                        <p class="text-gray-400 text-sm mb-3">How ChatGPT and AI tools are transforming work and creativity...</p>
-                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
-                    </div>
-                </a>
-                <a href="blogs.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block bg-pubg-gold/10 border-2 border-pubg-gold">
-                    <div class="p-4 h-full flex flex-col justify-center items-center text-center">
-                        <div class="text-pubg-gold text-3xl mb-3">
-                            <i class="fas fa-plus-circle"></i>
-                        </div>
+                <a href="blogs.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block bg-pubg-gold/10 border-2 border-pubg-gold/40">
+                    <div class="p-6 h-full flex flex-col justify-center items-center text-center">
+                        <div class="text-pubg-gold text-4xl mb-4"><i class="fas fa-book-open"></i></div>
                         <h3 class="text-lg font-bold mb-2 text-pubg-gold">All Blogs</h3>
-                        <p class="text-gray-300 text-sm mb-3">Browse our complete collection of articles and guides</p>
+                        <p class="text-gray-300 text-sm mb-4">Explore the full archive of guides, tips & insights.</p>
                         <button class="text-pubg-gold text-sm font-bold">View All →</button>
                     </div>
                 </a>

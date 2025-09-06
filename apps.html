@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>App Hub — All Apps & Tools</title>
+	<meta name="description" content="Browse all free apps and tools available on App Hub: Spotify, Canva, CapCut, ChatGPT, Grammarly, Telegram, PUBG Mobile and more.">
+	<meta name="keywords" content="App Hub, Apps, Tools, Free Apps, Spotify, Canva, CapCut, ChatGPT, Grammarly, Telegram, PUBG, CapCut Desktop">
+	<meta property="og:title" content="App Hub — All Apps & Tools">
+	<meta property="og:description" content="Explore every free app and tool from App Hub in one place.">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="Images/Index/g1.jpeg">
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" as="style">
+	<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'rajdhani': ['Rajdhani','sans-serif'],
+						'orbitron': ['Orbitron','monospace']
+					},
+					colors: {
+						'pubg-gold': '#f1c40f',
+						'pubg-gold-dark': '#e6b800',
+						'pubg-orange': '#ff6b35',
+						'pubg-dark': '#1a1a1a',
+						'pubg-dark-light': '#2d2d2d',
+						'pubg-gray': '#3a3a3a'
+					},
+					animation: {
+						'fadeIn': 'fadeIn 0.8s ease-out forwards',
+						'slideInUp': 'slideInUp 0.8s ease-out forwards'
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		.pubg-card { background: linear-gradient(145deg,#2d2d2d,#1a1a1a); border:1px solid #f1c40f; box-shadow:0 4px 15px rgba(241,196,15,.1);} 
+		.pubg-button { background:linear-gradient(45deg,#f1c40f,#e6b800); box-shadow:0 4px 15px rgba(241,196,15,.3); transition:all .3s ease; }
+		.pubg-button:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(241,196,15,.5);} 
+		@keyframes fadeIn { from{opacity:0} to{opacity:1} } @keyframes slideInUp { from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)} }
+		.animate-on-scroll { opacity:0; transform:translateY(30px);} 
+		.dropdown-menu { opacity:0; transform:translateY(-10px); transition:.3s ease; pointer-events:none; z-index:1000; }
+		.dropdown:hover .dropdown-menu, .dropdown.active .dropdown-menu { opacity:1; transform:translateY(0); pointer-events:auto; }
+		.hero-section { background:linear-gradient(rgba(26,26,26,.55),rgba(26,26,26,.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop'); background-size:cover; background-position:center; }
+		@media(max-width:767px){ .hero-section { background:linear-gradient(rgba(26,26,26,.55),rgba(26,26,26,.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop'); } }
+		.mobile-menu { transform:translateX(-100%); transition:transform .3s ease; }
+		.mobile-menu.active { transform:translateX(0); }
+	</style>
+</head>
+<body class="bg-pubg-dark text-white font-rajdhani overflow-x-hidden">
+
+	<!-- Navigation -->
+	<nav class="fixed top-0 w-full bg-pubg-dark/95 backdrop-blur-md border-b border-pubg-gold/30 z-50">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="flex justify-between items-center h-16">
+				<div class="flex items-center">
+					<div class="w-10 h-10 bg-pubg-gold rounded-full flex items-center justify-center mr-3">
+						<svg class="w-6 h-6 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+					</div>
+					<span class="text-xl font-orbitron font-bold text-pubg-gold">App Hub</span>
+				</div>
+				<div class="hidden md:flex space-x-8">
+					<div class="dropdown relative"><a href="index.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">Home</a></div>
+					<div class="dropdown relative"><a href="PUBG/pubg.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">PUBG</a></div>
+					<div class="dropdown relative">
+						<a href="#apps" class="text-pubg-gold transition-colors flex items-center">Apps & Tools <i class="fas fa-chevron-down ml-1 text-xs"></i></a>
+						<div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-pubg-dark-light rounded border border-pubg-gold/20">
+							<a href="apps.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors text-pubg-gold">All Apps & Tools</a>
+							<a href="canva.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Canva</a>
+							<a href="capcut.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut</a>
+							<a href="capcutDesktop.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut Desktop</a>
+							<a href="chatgpt.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">ChatGPT</a>
+							<a href="grammerly.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Grammarly</a>
+							<a href="spotify.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Spotify</a>
+							<a href="telegram.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Telegram</a>
+						</div>
+					</div>
+					<div class="dropdown relative">
+						<a href="index.html#blogs" class="text-white hover:text-pubg-gold transition-colors flex items-center">Blogs <i class="fas fa-chevron-down ml-1 text-xs"></i></a>
+						<div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-pubg-dark-light rounded border border-pubg-gold/20">
+							<a href="index.html#blogs" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Latest Blogs</a>
+							<a href="blogs.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Blogs</a>
+							<a href="blogs-view.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Blog Viewer</a>
+						</div>
+					</div>
+					<div class="dropdown relative"><a href="index.html#contact" class="text-white hover:text-pubg-gold transition-colors flex items-center">Contact Us</a></div>
+				</div>
+				<button class="md:hidden relative" id="mobile-menu-btn">
+					<svg class="w-6 h-6 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+					<svg class="w-6 h-6 cross-icon absolute top-0 left-0 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+				</button>
+			</div>
+		</div>
+		<div class="md:hidden mobile-menu fixed top-16 left-0 w-full h-screen bg-pubg-dark/95 backdrop-blur-md" id="mobile-menu">
+			<div class="p-4 space-y-2">
+				<div class="mobile-dropdown"><a href="index.html" class="block text-white hover:text-pubg-gold py-3">Home</a></div>
+				<div class="mobile-dropdown"><a href="PUBG/pubg.html" class="block text-white hover:text-pubg-gold py-3">PUBG</a></div>
+				<div class="mobile-dropdown">
+					<div class="flex items-center justify-between">
+						<a href="#apps" class="flex-1 text-pubg-gold py-3">Apps & Tools</a>
+						<button class="mobile-dropdown-btn text-pubg-gold py-3 px-3"><i class="fas fa-chevron-down transition-transform text-sm"></i></button>
+					</div>
+					<div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+						<a href="apps.html" class="block text-pubg-gold hover:text-white py-2 text-sm">All Apps & Tools</a>
+						<a href="canva.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Canva</a>
+						<a href="capcut.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Capcut</a>
+						<a href="capcutDesktop.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Capcut Desktop</a>
+						<a href="chatgpt.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">ChatGPT</a>
+						<a href="grammerly.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Grammarly</a>
+						<a href="spotify.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Spotify</a>
+						<a href="telegram.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Telegram</a>
+					</div>
+				</div>
+				<div class="mobile-dropdown">
+					<div class="flex items-center justify-between">
+						<a href="index.html#blogs" class="flex-1 text-white hover:text-pubg-gold py-3">Blogs</a>
+						<button class="mobile-dropdown-btn text-white hover:text-pubg-gold py-3 px-3"><i class="fas fa-chevron-down transition-transform text-sm"></i></button>
+					</div>
+					<div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+						<a href="index.html#blogs" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Latest Blogs</a>
+						<a href="blogs.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">All Blogs</a>
+						<a href="blogs-view.html" class="block text-gray-300 hover:text-pubg-gold py-2 text-sm">Blog Viewer</a>
+					</div>
+				</div>
+				<div class="mobile-dropdown"><a href="index.html#contact" class="block text-white hover:text-pubg-gold py-3">Contact Us</a></div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Hero -->
+	<section class="hero-section min-h-screen flex items-center pt-16">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+			<div class="text-center">
+				<h1 class="text-4xl lg:text-6xl font-orbitron font-bold mb-6 animate-on-scroll"><span class="text-pubg-gold">All Apps & Tools</span></h1>
+				<p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-on-scroll">Browse our complete library of powerful, free applications and productivity enhancers. Curated for creators, gamers, developers, students, and everyday users—no subscriptions, no hidden costs.</p>
+				<div class="flex flex-wrap justify-center gap-3 animate-on-scroll">
+					<a href="index.html"><button class="pubg-button text-pubg-dark font-bold py-3 px-6 rounded hover:scale-105 transition-all">← Back to Home</button></a>
+					<a href="index.html#blogs"><button class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded transition-all">Read Blogs</button></a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Apps Grid -->
+	<section id="apps" class="min-h-screen py-20 bg-pubg-dark">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+				<!-- Spotify -->
+				<a href="spotify.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/Spotify/bg1.jpeg" alt="Spotify Free Music & Podcasts" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">Spotify</h3>
+						<p class="text-gray-400 text-sm mb-3">Stream millions of songs, podcasts, and playlists. Discover weekly mixes and personalize your listening experience.</p>
+						<button class="text-pubg-gold text-sm font-bold">Open →</button>
+					</div>
+				</a>
+				<!-- Canva -->
+				<a href="canva.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/Canva/bg.jpg" alt="Canva Design Tool" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">Canva</h3>
+						<p class="text-gray-400 text-sm mb-3">Create social graphics, videos, presentations and more with drag‑and‑drop simplicity and thousands of templates.</p>
+						<button class="text-pubg-gold text-sm font-bold">Design →</button>
+					</div>
+				</a>
+				<!-- CapCut -->
+				<a href="capcut.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/Capcut/bg.jpeg" alt="CapCut Mobile Editor" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">CapCut</h3>
+						<p class="text-gray-400 text-sm mb-3">Fast, powerful mobile video editing with effects, text, keyframes, audio sync, and trending export presets.</p>
+						<button class="text-pubg-gold text-sm font-bold">Edit →</button>
+					</div>
+				</a>
+				<!-- ChatGPT -->
+				<a href="chatgpt.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/ChatGPT/bg1.jpeg" alt="ChatGPT AI Assistant" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">ChatGPT</h3>
+						<p class="text-gray-400 text-sm mb-3">Answer questions, brainstorm ideas, generate content, and learn faster using an intelligent conversational AI.</p>
+						<button class="text-pubg-gold text-sm font-bold">Chat →</button>
+					</div>
+				</a>
+				<!-- Grammarly -->
+				<a href="grammerly.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/Grammarly/bg.jpeg" alt="Grammarly Writing Assistant" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">Grammarly</h3>
+						<p class="text-gray-400 text-sm mb-3">Enhance clarity, tone, and correctness in real time. Perfect for students, professionals, and content creators.</p>
+						<button class="text-pubg-gold text-sm font-bold">Improve →</button>
+					</div>
+				</a>
+				<!-- Telegram (placeholder image via Unsplash for now) -->
+				<a href="telegram.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=200&fit=crop" alt="Telegram Messaging" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">Telegram</h3>
+						<p class="text-gray-400 text-sm mb-3">Fast, secure cloud messaging with channels, media sharing, and powerful bot automation capabilities.</p>
+						<button class="text-pubg-gold text-sm font-bold">Join →</button>
+					</div>
+				</a>
+				<!-- CapCut Desktop -->
+				<a href="capcutDesktop.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="Images/Capcut/bg1.jpeg" alt="CapCut Desktop Editor" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">CapCut Desktop</h3>
+						<p class="text-gray-400 text-sm mb-3">Enhanced desktop workflow: multi-track editing, precise timing, and pro export options for creators.</p>
+						<button class="text-pubg-gold text-sm font-bold">Launch →</button>
+					</div>
+				</a>
+				<!-- PUBG -->
+				<a href="PUBG/pubg.html" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+					<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=200&fit=crop" alt="PUBG Mobile" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h3 class="text-lg font-bold mb-2">PUBG Mobile</h3>
+						<p class="text-gray-400 text-sm mb-3">Tactical battle royale action. Squad up, strategize, and survive intense matches across dynamic maps.</p>
+						<button class="text-pubg-gold text-sm font-bold">Play →</button>
+					</div>
+				</a>
+			</div>
+			<div class="text-center mt-16 animate-on-scroll">
+				<div class="pubg-card p-8 rounded inline-block">
+					<div class="text-pubg-gold text-4xl mb-4"><i class="fas fa-plus-circle"></i></div>
+					<h3 class="text-xl font-bold mb-3">Suggest a New App</h3>
+					<p class="text-gray-400 mb-4">Know a powerful free tool we should feature? Send it to us and help grow the hub.</p>
+					<a href="index.html#contact"><button class="pubg-button text-pubg-dark font-bold py-3 px-6 rounded hover:scale-105 transition-all">Contact Us</button></a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg-pubg-dark border-t border-pubg-gold/30 py-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+				<div class="col-span-1 md:col-span-2">
+					<div class="flex items-center mb-4">
+						<div class="w-12 h-12 bg-pubg-gold rounded-full flex items-center justify-center mr-4">
+							<svg class="w-8 h-8 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+						</div>
+						<div>
+							<h3 class="text-2xl font-orbitron font-bold text-pubg-gold">App Hub</h3>
+							<p class="text-gray-400">100% free apps & tools</p>
+						</div>
+					</div>
+					<p class="text-gray-400 mb-6 max-w-md">Discover apps, tools, and blogs—100% free with no paywall, ad-light experience, and instant access to trusted tools.</p>
+					<div class="flex space-x-4">
+						<a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors"><i class="fab fa-youtube"></i></a>
+						<a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors"><i class="fab fa-discord"></i></a>
+						<a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors"><i class="fab fa-twitter"></i></a>
+						<a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors"><i class="fab fa-facebook"></i></a>
+					</div>
+				</div>
+				<div>
+					<h4 class="text-lg font-semibold text-pubg-gold mb-4">Quick Links</h4>
+					<ul class="space-y-2">
+						<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+						<li><a href="apps.html" class="text-gray-400 hover:text-white transition-colors">Apps</a></li>
+						<li><a href="index.html#blogs" class="text-gray-400 hover:text-white transition-colors">Blogs</a></li>
+						<li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+						<li><a href="index.html#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="text-lg font-semibold text-pubg-gold mb-4">More</h4>
+					<ul class="space-y-2">
+						<li><a href="index.html#faqs" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+						<li><a href="PUBG/pubg.html" class="text-gray-400 hover:text-white transition-colors">PUBG</a></li>
+						<li><a href="blogs.html" class="text-gray-400 hover:text-white transition-colors">All Blogs</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="border-t border-pubg-gold/30 mt-8 pt-4 text-center">
+				<p class="text-gray-400">© 2025 Game Hub. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		// Mobile menu toggle
+		const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
+		const crossIcon = mobileMenuBtn.querySelector('.cross-icon');
+		mobileMenuBtn.addEventListener('click', () => {
+			mobileMenu.classList.toggle('active');
+			const active = mobileMenu.classList.contains('active');
+			hamburgerIcon.style.opacity = active ? '0':'1';
+			crossIcon.style.opacity = active ? '1':'0';
+		});
+		document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', ()=>{ mobileMenu.classList.remove('active'); hamburgerIcon.style.opacity='1'; crossIcon.style.opacity='0'; }));
+		// Mobile dropdowns
+		document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+			btn.addEventListener('click', e => { e.preventDefault(); const d = btn.closest('.mobile-dropdown'); const menu = d.querySelector('.mobile-dropdown-menu'); const icon = btn.querySelector('i'); if(menu.classList.contains('hidden')){ document.querySelectorAll('.mobile-dropdown-menu').forEach(m=>m.classList.add('hidden')); document.querySelectorAll('.mobile-dropdown-btn i').forEach(i=>i.style.transform='rotate(0deg)'); menu.classList.remove('hidden'); icon.style.transform='rotate(180deg)'; } else { menu.classList.add('hidden'); icon.style.transform='rotate(0deg)'; }});
+		});
+		// Scroll animations
+		const observer = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add(Math.random()>0.5 ? 'animate-fadeIn':'animate-slideInUp'); entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; observer.unobserve(entry.target); } }); }, {threshold:0.1});
+		document.querySelectorAll('.animate-on-scroll').forEach(el=>observer.observe(el));
+	</script>
+</body>
+</html>

@@ -1,818 +1,733 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+    SETUP INSTRUCTIONS FOR CONTACT FORM:
+    
+    To enable the contact form to send emails directly to your Gmail:
+    
+    Option 1 - EmailJS (Recommended):
+    1. Sign up at https://www.emailjs.com/
+    2. Create a service and template
+    3. Replace the placeholders below:
+       - YOUR_SERVICE_ID
+       - YOUR_TEMPLATE_ID  
+       - YOUR_USER_ID
+    4. The form will automatically send emails to your configured Gmail
+    
+    Option 2 - Formspree:
+    1. Sign up at https://formspree.io/
+    2. Create a form and get your endpoint
+    3. Replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint
+    4. Uncomment the Formspree section and comment out EmailJS section
+    
+    Mobile Hero Background:
+    - Desktop uses: https://images.unsplash.com/photo-1542751371-adc38448a05e (gaming setup)
+    - Mobile uses: https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600 (same image, mobile optimized)
+    -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GameHub Blog - Latest Gaming Insights, Technologies, and Industry News">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0a0a0f">
-    <title>GameHub Blog - Gaming Insights & Industry News</title>
-
-    <!-- Optimized Font Loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap">
+    <title>App Hub — All Blogs</title>
+    <meta name="description" content="Explore our complete collection of articles, guides, and tutorials about apps, tools, gaming, and technology. All blogs from App Hub in one place.">
+    <meta name="keywords" content="App Hub, Blogs, Articles, Tutorials, Guides, Apps, Tools, Technology, Gaming, Reviews">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="App Hub — All Blogs">
+    <meta property="og:description" content="Explore our complete collection of articles, guides, and tutorials about apps, tools, gaming, and technology.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Images/Index/g1.jpeg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="App Hub — All Blogs">
+    <meta name="twitter:description" content="Complete collection of articles, guides, and tutorials from App Hub.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" as="style">
+    <link rel="preload" href="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop" as="image">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'rajdhani': ['Rajdhani', 'sans-serif'],
+                        'orbitron': ['Orbitron', 'monospace'],
+                    },
+                    colors: {
+                        'pubg-gold': '#f1c40f',
+                        'pubg-gold-dark': '#e6b800',
+                        'pubg-orange': '#ff6b35',
+                        'pubg-dark': '#1a1a1a',
+                        'pubg-dark-light': '#2d2d2d',
+                        'pubg-gray': '#3a3a3a',
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slideInLeft': 'slideInLeft 0.8s ease-out forwards',
+                        'slideInRight': 'slideInRight 0.8s ease-out forwards',
+                        'slideInUp': 'slideInUp 0.8s ease-out forwards',
+                        'slideInDown': 'slideInDown 0.8s ease-out forwards',
+                        'fadeIn': 'fadeIn 0.8s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom PUBG-inspired styles */
+        .pubg-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
         }
-
-        :root {
-            --primary-glow: #667eea;
-            --secondary-glow: #764ba2;
-            --accent-glow: #f093fb;
-            --success-glow: #4facfe;
-            --warning-glow: #f6d365;
-            --danger-glow: #ff6b6b;
-            --neon-blue: #00f5ff;
-            --neon-pink: #ff006e;
-            --neon-green: #39ff14;
-            --neon-purple: #bf00ff;
-            --cyber-orange: #ff9500;
-            --quantum-gold: #ffd700;
-            --matrix-red: #ff0040;
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #1a1a2e;
-            --bg-card: #16213e;
-            --bg-glass: rgba(0, 0, 0, 0.3);
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-color: #475569;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --glow-primary: rgba(102, 126, 234, 0.5);
-            --glow-secondary: rgba(118, 75, 162, 0.5);
+        
+        .pubg-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
         }
-
-        body {
-            font-family: 'Rajdhani', 'Arial', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .orbitron {
-            font-family: 'Orbitron', 'Courier New', monospace;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-green), var(--neon-purple));
-            background-size: 400% 100%;
-            animation: rainbow-flow 3s linear infinite;
-        }
-
-        @keyframes rainbow-flow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 15, 0.98);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-        }
-
-        .gaming-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            position: relative;
-        }
-
-        .gaming-logo::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
-            border-radius: 12px;
-            opacity: 0;
-            filter: blur(10px);
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .gaming-logo:hover::before {
-            opacity: 0.7;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 8px;
+        
+        .pubg-button {
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
             transition: all 0.3s ease;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
         }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::before {
-            opacity: 0.2;
-        }
-
-        .nav-link:hover::after {
-            width: 80%;
-        }
-
-        .nav-link:hover {
+        
+        .pubg-button:hover {
             transform: translateY(-2px);
-            color: #fff;
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.5);
         }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            color: white;
+        
+        .pubg-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .mobile-menu-btn {
-            display: none;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            color: var(--neon-blue);
-            padding: 0.75rem;
-            border-radius: 50px;
-            cursor: pointer;
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(241, 196, 15, 0.3); }
+            to { box-shadow: 0 0 20px rgba(241, 196, 15, 0.6); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
             transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
         }
-
-        .mobile-menu-btn:hover {
-            background: rgba(0, 245, 255, 0.2);
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown .dropdown-menu:hover {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            transition-delay: 0s !important;
+        }
+        
+        .dropdown {
+            padding-bottom: 10px;
+        }
+        
+        .dropdown:nth-last-child(-n+3) .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .dropdown:nth-last-child(-n+4) .dropdown-menu {
+                left: auto;
+                right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dropdown .dropdown-menu {
+                left: 0 !important;
+                right: auto !important;
+                width: 100vw;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        /* Hero background - desktop uses gaming setup, mobile uses same image optimized */
+        @media (min-width: 768px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
             transform: scale(1.05);
         }
-
+        
         .mobile-menu {
-            display: none;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
-
-        .mobile-menu.show {
-            display: block;
+        
+        .mobile-menu.active {
+            transform: translateX(0);
         }
-
-        .mobile-menu a {
-            display: block;
-            padding: 16px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .mobile-menu a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 0;
-            background: var(--neon-blue);
-            transition: width 0.3s ease;
-        }
-
-        .mobile-menu a:hover::before {
-            width: 4px;
-        }
-
-        .mobile-menu a:hover {
-            background: var(--bg-glass);
-            transform: translateX(10px);
-            color: var(--neon-blue);
-        }
-
-        /* Holographic Effect */
-        .holographic {
-            background: linear-gradient(45deg, 
-                var(--neon-blue) 0%, 
-                var(--neon-pink) 25%, 
-                var(--neon-green) 50%, 
-                var(--neon-purple) 75%, 
-                var(--neon-blue) 100%);
-            background-size: 400% 400%;
-            animation: holographic-shift 3s ease infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes holographic-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Main Container */
-        .main-container {
-            margin-top: 20px;
-            min-height: calc(100vh - 80px);
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
-        }
-
-        /* Blog Header */
-        .blog-header {
-            text-align: center;
-            padding: 4rem 2rem 2rem;
-            position: relative;
-        }
-
-        .blog-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 900;
-            background: holographic,(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .blog-subtitle {
-            font-size: clamp(1rem, 2vw, 1rem);
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto -2.2rem;
-            line-height: 1.7;
-        }
-
-        /* Blog Grid */
-        .blog-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        /* Blog Cards */
-        .blog-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            height: fit-content;
-        }
-
-        .blog-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: black;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-            border-radius: 18px;
-            transition: 0.3s;
-        }
-
-        .blog-card:hover {
-            transform: translate(5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .blog-card:hover::before {
-            opacity: 1;
-        }
-
-        .category-badge {
-            display: inline-block;
-            background: rgba(0, 245, 255, 0.2);
-            color: var(--neon-blue);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(0, 245, 255, 0.3);
-        }
-
-        .blog-card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .blog-card-excerpt {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .blog-date {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .blog-author {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .read-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            color: white;
-            padding: 0.75rem 1.5rem;
+        
+        /* Toast notification styles */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .read-more-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .read-more-btn:hover::before {
-            left: 100%;
-        }
-
-        .read-more-btn:hover {
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.4);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        .animate-delay-1 { animation-delay: 0.1s; }
-        .animate-delay-2 { animation-delay: 0.2s; }
-        .animate-delay-3 { animation-delay: 0.3s; }
-        .animate-delay-4 { animation-delay: 0.4s; }
-        .animate-delay-5 { animation-delay: 0.5s; }
-        .animate-delay-6 { animation-delay: 0.6s; }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--neon-blue);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .blog-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .blog-header {
-                padding: 3rem 1rem 1rem;
-            }
-
-            .blog-container {
-                padding: 0 1rem 3rem;
-            }
-
-            .blog-card {
-                padding: 1.25rem;
-            }
-
-            .blog-card-meta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .blog-card {
-                padding: 1rem;
-            }
-
-            .read-more-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--neon-blue);
             color: white;
+            font-weight: bold;
+            z-index: 9999;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
         }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 12px;
+        
+        .toast.show {
+            transform: translateX(0);
         }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
+        
+        .toast.success {
+            background: linear-gradient(45deg, #10b981, #059669);
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            border-radius: 6px;
+        
+        .toast.error {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+        }
+        
+        /* Badge styles */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 20px;
+            margin: 2px;
         }
     </style>
 </head>
-<body>
+<body class="bg-pubg-dark text-white font-rajdhani overflow-x-hidden">
+    
     <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="gaming-logo">
-                <i class="fa-solid fa-blog fa-beat"></i>
-                <span class="orbitron holographic" style="font-size: 1.25rem; font-weight: 700;">GameHub</span>
-            </a>
-
-            <div class="nav-links">
-                <a href="index.html" class="nav-link"><i class="fa-solid fa-house-user"></i> Home</a>
-                <a href="games.html" class="nav-link holographic"><i class="fa fa-gamepad"></i> Games</a>
-                <a href="blogs.html" class="nav-link active"><i class="fa fa-blog"></i> Blogs</a>
-                <a href="index.html#about" class="nav-link"><i class="fa fa-address-card"></i> About</a>
-                <a href="index.html#contact" class="nav-link"><i class="fa fa-headset"></i> Contact Us</a>
+    <nav class="fixed top-0 w-full bg-pubg-dark/95 backdrop-blur-md border-b border-pubg-gold/30 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-pubg-gold rounded-full flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-orbitron font-bold text-pubg-gold">App Hub</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <div class="dropdown relative">
+                        <a href="index.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Home
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="PUBG/pubg.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            PUBG
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="index.html#apps" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Apps & Tools
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="index.html#apps" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Apps And Tools</a>
+                            <a href="canva.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Canva</a>
+                            <a href="capcut.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut</a>
+                            <a href="capcutDesktop.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut Desktop</a>
+                            <a href="chatgpt.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Chatgpt</a>
+                            <a href="grammerly.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Grammerly</a>
+                            <a href="spotify.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Spotify</a>
+                            <a href="telegram.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Telegram</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#blogs" class="text-pubg-gold hover:text-white transition-colors flex items-center">
+                            Blogs
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="index.html#blogs" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Latest Blogs</a>
+                            <a href="blogs.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors text-pubg-gold">All Blogs</a>
+                            <a href="blogs-view.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Blog Viewer</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="index.html#contact" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button class="md:hidden relative" id="mobile-menu-btn">
+                    <svg class="w-6 h-6 hamburger-icon transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 cross-icon absolute top-0 left-0 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden mobile-menu fixed top-16 left-0 w-full h-screen bg-pubg-dark/95 backdrop-blur-md" id="mobile-menu">
+            <div class="p-4 space-y-2">
+                <div class="mobile-dropdown">
+                    <a href="index.html" class="block text-white hover:text-pubg-gold transition-colors py-3">Home</a>
+                </div>
 
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Home</a>
-            <a href="games.html" class="holographic">Games</a>
-            <a href="blog.html" class="holographic"><i class="fa fa-blog"></i> Blogs</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact Us</a>
+                <div class="mobile-dropdown">
+                    <a href="PUBG/pubg.html" class="block text-white hover:text-pubg-gold transition-colors py-3">PUBG</a>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="index.html#apps" class="flex-1 text-white hover:text-pubg-gold transition-colors py-3">Apps & Tools</a>
+                        <button class="mobile-dropdown-btn text-white hover:text-pubg-gold transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="index.html#apps" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">All Apps And Tools</a>
+                        <a href="canva.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Canva</a>
+                        <a href="capcut.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Capcut</a>
+                        <a href="capcutDesktop.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Capcut Desktop</a>
+                        <a href="chatgpt.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Chatgpt</a>
+                        <a href="grammerly.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Grammerly</a>
+                        <a href="spotify.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Spotify</a>
+                        <a href="telegram.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Telegram</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="#blogs" class="flex-1 text-pubg-gold hover:text-white transition-colors py-3">Blogs</a>
+                        <button class="mobile-dropdown-btn text-pubg-gold hover:text-white transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="index.html#blogs" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Latest Blogs</a>
+                        <a href="blogs.html" class="block text-pubg-gold hover:text-white transition-colors py-2 text-sm">All Blogs</a>
+                        <a href="blogs-view.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Blog Viewer</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <a href="index.html#contact" class="block text-white hover:text-pubg-gold transition-colors py-3">Contact Us</a>
+                </div>
+            </div>
         </div>
     </nav>
-
-    <!-- Main Container -->
-    <main class="main-container">
-        <!-- Blog Header -->
-        <header class="blog-header">
-            <h1 class="blog-title orbitron holographic"><i class="fa fa-blog holographic"></i> Our Latest Blogs</h1>
-            <p class="blog-subtitle">
-                Discover insights from the gaming multiverse, cutting-edge technologies, 
-                and the future of interactive entertainment.
-            </p>
-        </header>
-
-        <!-- Blog Container -->
-        <div class="blog-container">
-            <div class="blog-grid">
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <h1 class="text-4xl lg:text-6xl font-orbitron font-bold mb-6 animate-on-scroll">
+                    <span class="text-pubg-gold">All Blogs</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-on-scroll">
+                    Explore our complete collection of articles, guides, and tutorials covering apps, tools, gaming, technology, and productivity tips.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-3 animate-on-scroll">
+                    <a href="index.html"><button class="pubg-button text-pubg-dark font-bold py-3 px-6 rounded hover:scale-105 transition-all">← Back to Home</button></a>
+                    <a href="index.html#apps"><button class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded transition-all">Browse Apps</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- All Blogs Section -->
+    <section id="blogs" class="min-h-screen py-20 bg-pubg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                
                 <!-- Blog Card 1 -->
-                <article class="blog-card animate-fade-in-up animate-delay-1">
-                    <span class="category-badge">Technology</span>
-                    <h2 class="blog-card-title">The Future of Gaming AI</h2>
-                    <p class="blog-card-excerpt">
-                        Exploring how artificial intelligence is revolutionizing game development and creating immersive player experiences, from procedural generation to adaptive gameplay mechanics.
-
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 15, 2025</span>
-                        </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>Alex Chen</span>
-                        </div>
+                <a href="blogs-view.html?id=blog-post-1" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="Best Free Apps 2025" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Best Free Apps 2025</h3>
+                        <p class="text-gray-400 text-sm mb-3">Discover the top free apps that are changing the game this year. From productivity tools to entertainment apps, we've curated the best of the best.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
-                    <a href="blogs-view.html" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>
+                </a>
 
                 <!-- Blog Card 2 -->
-                <article class="blog-card animate-fade-in-up animate-delay-2">
-                    <span class="category-badge">Graphics</span>
-                    <h2 class="blog-card-title">Quantum Graphics Revolution</h2>
-                    <p class="blog-card-excerpt">
-                        Discover the breakthrough in quantum-enhanced graphics rendering that's changing the visual landscape of gaming. Real-time ray tracing meets quantum computing.
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 12, 2025</span>
-                        </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>Sarah Kim</span>
-                        </div>
+                <a href="blogs-view.html?id=blog-post-2" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=200&fit=crop" alt="Productivity Hacks" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Ultimate Productivity Hacks</h3>
+                        <p class="text-gray-400 text-sm mb-3">10 powerful tools and techniques that will boost your productivity without breaking the bank. Learn from productivity experts.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
-                    <a href="blogs-view1.html" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>
+                </a>
 
                 <!-- Blog Card 3 -->
-                <article class="blog-card animate-fade-in-up animate-delay-3">
-                    <span class="category-badge">Innovation</span>
-                    <h2 class="blog-card-title">Neural Interface Gaming</h2>
-                    <p class="blog-card-excerpt">
-                        How brain-computer interfaces are opening new dimensions in player control and immersive gameplay mechanics. The next evolution of gaming input.
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 10, 2025</span>
-                        </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>Marcus Rivera</span>
-                        </div>
+                <a href="blogs-view.html?id=blog-post-3" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" alt="Design Like a Pro" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Design Like a Pro</h3>
+                        <p class="text-gray-400 text-sm mb-3">Master Canva and other design tools with these expert tips and tricks. Create stunning visuals for your projects.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
-                    <a href="#" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>
+                </a>
 
                 <!-- Blog Card 4 -->
-                <article class="blog-card animate-fade-in-up animate-delay-4">
-                    <span class="category-badge">Metaverse</span>
-                    <h2 class="blog-card-title">Metaverse Gaming Ecosystems</h2>
-                    <p class="blog-card-excerpt">
-                        Building interconnected virtual worlds where players can seamlessly transition between different gaming universes. The future of persistent digital spaces.
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 8, 2025</span>
-                        </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>Luna Park</span>
-                        </div>
+                <a href="blogs-view.html?id=blog-post-4" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="Tech News Weekly" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Tech News Weekly</h3>
+                        <p class="text-gray-400 text-sm mb-3">Stay updated with the latest in technology and app releases. Your weekly dose of tech news and innovations.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
-                    <a href="#" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>
+                </a>
 
                 <!-- Blog Card 5 -->
-                <article class="blog-card animate-fade-in-up animate-delay-5">
-                    <span class="category-badge">Security</span>
-                    <h2 class="blog-card-title">Cybersecurity in Gaming</h2>
-                    <p class="blog-card-excerpt">
-                        Protecting player data and ensuring secure gaming environments in an increasingly connected digital world. Advanced encryption and anti-cheat systems.
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 5, 2025</span>
-                        </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>David Torres</span>
-                        </div>
+                <a href="blogs-view.html?id=blog-post-5" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=200&fit=crop" alt="PUBG Mobile Pro Guide" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">PUBG Mobile Pro Guide</h3>
+                        <p class="text-gray-400 text-sm mb-3">Master the battleground with these advanced strategies, weapon guides, and pro tips from top players.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
                     </div>
-                    <a href="#" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>
+                </a>
 
                 <!-- Blog Card 6 -->
-                <article class="blog-card animate-fade-in-up animate-delay-6">
-                    <span class="category-badge">Sustainability</span>
-                    <h2 class="blog-card-title">Sustainable Gaming Tech</h2>
-                    <p class="blog-card-excerpt">
-                        Environmental innovations in gaming hardware and software development for a greener digital future. Energy-efficient processing and eco-friendly practices.
-                    </p>
-                    <div class="blog-card-meta">
-                        <div class="blog-date">
-                            <i class="fas fa-calendar-alt holographic"></i>
-                            <span>January 3, 2025</span>
+                <a href="blogs-view.html?id=blog-post-6" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&h=200&fit=crop" alt="Video Editing Mastery" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Video Editing Mastery</h3>
+                        <p class="text-gray-400 text-sm mb-3">Learn CapCut from scratch and create stunning videos. Complete guide with advanced techniques and creative effects.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 7 -->
+                <a href="blogs-view.html?id=blog-post-7" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop" alt="AI Revolution 2025" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">AI Revolution 2025</h3>
+                        <p class="text-gray-400 text-sm mb-3">How ChatGPT and AI tools are transforming work, creativity, and daily life. The complete guide to AI adoption.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 8 -->
+                <a href="blogs-view.html?id=blog-post-8" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=200&fit=crop" alt="Spotify Hidden Features" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Spotify Hidden Features</h3>
+                        <p class="text-gray-400 text-sm mb-3">Unlock the full potential of Spotify with these lesser-known features and tips for the ultimate music experience.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 9 -->
+                <a href="blogs-view.html?id=blog-post-9" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=400&h=200&fit=crop" alt="Grammar & Writing Tips" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Grammar & Writing Tips</h3>
+                        <p class="text-gray-400 text-sm mb-3">Improve your writing with Grammarly and other tools. Professional writing tips for better communication.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 10 -->
+                <a href="blogs-view.html?id=blog-post-10" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=400&h=200&fit=crop" alt="Social Media Strategy" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Social Media Strategy</h3>
+                        <p class="text-gray-400 text-sm mb-3">Build your online presence with powerful social media strategies and free tools. From content creation to audience engagement.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 11 -->
+                <a href="blogs-view.html?id=blog-post-11" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=200&fit=crop" alt="Mobile Gaming Trends" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Mobile Gaming Trends</h3>
+                        <p class="text-gray-400 text-sm mb-3">Explore the latest trends in mobile gaming, from battle royales to puzzle games. What's hot in 2025.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+                <!-- Blog Card 12 -->
+                <a href="blogs-view.html?id=blog-post-12" class="pubg-card rounded overflow-hidden hover:scale-105 transition-all animate-on-scroll block">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="Digital Marketing Tools" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Digital Marketing Tools</h3>
+                        <p class="text-gray-400 text-sm mb-3">Free digital marketing tools that professionals use. Analytics, SEO, content creation, and more.</p>
+                        <button class="text-pubg-gold text-sm font-bold">Read →</button>
+                    </div>
+                </a>
+
+            </div>
+            
+            <!-- Load More Section -->
+            <div class="text-center mt-12 animate-on-scroll">
+                <div class="pubg-card p-8 rounded inline-block">
+                    <div class="text-pubg-gold text-4xl mb-4">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">That's All for Now!</h3>
+                    <p class="text-gray-400 mb-4">You've reached the end of our blog collection. Check back regularly for new articles and updates.</p>
+                    <a href="index.html#contact">
+                        <button class="pubg-button text-pubg-dark font-bold py-3 px-6 rounded hover:scale-105 transition-all">
+                            Suggest a Topic
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-pubg-dark border-t border-pubg-gold/30 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pubg-gold rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
                         </div>
-                        <div class="blog-author">
-                            <i class="fas fa-user holographic"></i>
-                            <span>Emma Watson</span>
+                        <div>
+                            <h3 class="text-2xl font-orbitron font-bold text-pubg-gold">App Hub</h3>
+                            <p class="text-gray-400">100% free apps & tools</p>
                         </div>
                     </div>
-                    <a href="#" class="read-more-btn">
-                        <span>Read More</span>
-                        <i class="fas fa-arrow-right holographic"></i>
-                    </a>
-                </article>    
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Discover apps, tools, and blogs—100% free with no paywall, ad-light experience, and instant access to trusted tools.
+                    </p>
+                    
+                    <!-- Social Links -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">YouTube</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Discord</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="index.html#apps" class="text-gray-400 hover:text-white transition-colors">Apps</a></li>
+                        <li><a href="blogs.html" class="text-gray-400 hover:text-white transition-colors">Blogs</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+                
+                <!-- More Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">More</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#faqs" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="PUBG/pubg.html" class="text-gray-400 hover:text-white transition-colors">PUBG</a></li>
+                        <li><a href="index.html#blogs" class="text-gray-400 hover:text-white transition-colors">Latest Blogs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="games.html">Try Games...</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
+            
+            <!-- Copyright -->
+            <div class="border-t border-pubg-gold/30 mt-8 pt-4 text-center">
+                <p class="text-gray-400">
+                    © 2025 Game Hub. All rights reserved.
+                </p>
             </div>
-            <p style="color: var(--text-secondary);" class="holographic">
-                © 2025 GameHub Neural Network. All rights reserved. Powered by quantum computing.
-            </p>
         </div>
     </footer>
-
+    
+    <!-- JavaScript -->
     <script>
+        // EmailJS config (inherited from index.html)
+        const EMAILJS_CONFIG = {
+            serviceID: 'service_1qk5yez',
+            templateID: 'template_x6ik6xb',
+            autoReplyTemplateID: 'template_z3t4og8',
+            userID: 'WphZK_lgY2RgIe0HF'
+        };
+        
+        // Init state
+        let EMAILJS_READY = false;
+        
+        // Initialize EmailJS
+        function getTrimmedPublicKey() {
+            return (EMAILJS_CONFIG.userID || '').trim();
+        }
+        (function initEmailJS() {
+            const PUBLIC_KEY = getTrimmedPublicKey();
+            if (!PUBLIC_KEY) return;
+            try { emailjs.init({ publicKey: PUBLIC_KEY }); EMAILJS_READY = true; } catch (e) {}
+        })();
+        
         // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
+        const crossIcon = mobileMenuBtn.querySelector('.cross-icon');
         
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('show');
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+            mobileMenu.classList.toggle('active');
+            
+            if (mobileMenu.classList.contains('active')) {
+                hamburgerIcon.style.opacity = '0';
+                crossIcon.style.opacity = '1';
             } else {
-                navbar.classList.remove('scrolled');
+                hamburgerIcon.style.opacity = '1';
+                crossIcon.style.opacity = '0';
             }
         });
-
-        // Smooth scrolling for anchor links
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a[href^="#"], #mobile-menu a[href^="index.html"]').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburgerIcon.style.opacity = '1';
+                crossIcon.style.opacity = '0';
+            });
+        });
+        
+        // Mobile dropdown functionality
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = btn.closest('.mobile-dropdown');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = btn.querySelector('i');
+                
+                document.querySelectorAll('.mobile-dropdown').forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        const otherMenu = otherDropdown.querySelector('.mobile-dropdown-menu');
+                        const otherIcon = otherDropdown.querySelector('i');
+                        if (otherMenu && otherIcon) {
+                            otherMenu.classList.add('hidden');
+                            otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    menu.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -825,17 +740,118 @@
                 }
             });
         });
+        
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const delay = Array.from(element.parentNode.children).indexOf(element) * 100;
+                    
+                    setTimeout(() => {
+                        const rect = element.getBoundingClientRect();
+                        const windowWidth = window.innerWidth;
+                        const elementCenter = rect.left + rect.width / 2;
+                        
+                        let animationClass;
+                        if (elementCenter < windowWidth * 0.33) {
+                            animationClass = 'animate-slideInLeft';
+                        } else if (elementCenter > windowWidth * 0.66) {
+                            animationClass = 'animate-slideInRight';
+                        } else {
+                            animationClass = Math.random() > 0.5 ? 'animate-slideInUp' : 'animate-fadeIn';
+                        }
+                        
+                        element.classList.add(animationClass);
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, delay);
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Enhanced dropdown functionality
+        let dropdownTimeouts = new Map();
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('show');
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            function showDropdown() {
+                if (dropdownTimeouts.has(dropdown)) {
+                    clearTimeout(dropdownTimeouts.get(dropdown));
+                    dropdownTimeouts.delete(dropdown);
+                }
+                dropdown.classList.add('active');
+            }
+            
+            function hideDropdown() {
+                const timeout = setTimeout(() => {
+                    dropdown.classList.remove('active');
+                    dropdownTimeouts.delete(dropdown);
+                }, 500);
+                
+                dropdownTimeouts.set(dropdown, timeout);
+            }
+            
+            dropdown.addEventListener('mouseenter', showDropdown);
+            if (menu) {
+                menu.addEventListener('mouseenter', showDropdown);
+            }
+            
+            dropdown.addEventListener('mouseleave', hideDropdown);
+            if (menu) {
+                menu.addEventListener('mouseleave', hideDropdown);
             }
         });
-
-        // Add loading animation on page load
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '1';
+        
+        // Add loading states for buttons
+        document.querySelectorAll('.pubg-button, .bg-pubg-orange, .bg-gray-600').forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (button.textContent.includes('Suggest') || button.textContent.includes('Back')) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Loading...';
+                    button.disabled = true;
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.disabled = false;
+                    }, 1000);
+                }
+            });
+        });
+        
+        // Parallax effect for hero background (desktop only)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.hero-section');
+                if (parallax) {
+                    const speed = scrolled * 0.5;
+                    parallax.style.backgroundPositionY = speed + 'px';
+                }
+            });
+        }
+        
+        // Preload critical images
+        const preloadImages = [
+            'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop',
+            'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop'
+        ];
+        
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
         });
     </script>
 </body>

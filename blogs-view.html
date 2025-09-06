@@ -1,319 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+    SETUP INSTRUCTIONS FOR CONTACT FORM:
+    
+    To enable the contact form to send emails directly to your Gmail:
+    
+    Option 1 - EmailJS (Recommended):
+    1. Sign up at https://www.emailjs.com/
+    2. Create a service and template
+    3. Replace the placeholders below:
+       - YOUR_SERVICE_ID
+       - YOUR_TEMPLATE_ID  
+       - YOUR_USER_ID
+    4. The form will automatically send emails to your configured Gmail
+    
+    Option 2 - Formspree:
+    1. Sign up at https://formspree.io/
+    2. Create a form and get your endpoint
+    3. Replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint
+    4. Uncomment the Formspree section and comment out EmailJS section
+    
+    Mobile Hero Background:
+    - Desktop uses: https://images.unsplash.com/photo-1542751371-adc38448a05e (gaming setup)
+    - Mobile uses: https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600 (same image, mobile optimized)
+    -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GameHub Blog - In-depth Gaming Articles & Industry Insights">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0a0a0f">
-    <title>GameHub Blog - Gaming Insights & Industry News</title>
-
-    <!-- Optimized Font Loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap">
+    <title>App Hub — Blog Viewer</title>
+    <meta name="description" content="Read the latest articles, guides, and tutorials from App Hub. In-depth content about apps, tools, gaming, and technology insights.">
+    <meta name="keywords" content="App Hub, Blog, Articles, Tutorials, Guides, Apps, Tools, Technology, Gaming, Reviews, Blog Viewer">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="App Hub — Blog Viewer">
+    <meta property="og:description" content="Read the latest articles, guides, and tutorials from App Hub about apps, tools, gaming, and technology.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Images/Index/g1.jpeg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="App Hub — Blog Viewer">
+    <meta name="twitter:description" content="In-depth articles and guides from App Hub about technology and apps.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" as="style">
+    <link rel="preload" href="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop" as="image">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'rajdhani': ['Rajdhani', 'sans-serif'],
+                        'orbitron': ['Orbitron', 'monospace'],
+                    },
+                    colors: {
+                        'pubg-gold': '#f1c40f',
+                        'pubg-gold-dark': '#e6b800',
+                        'pubg-orange': '#ff6b35',
+                        'pubg-dark': '#1a1a1a',
+                        'pubg-dark-light': '#2d2d2d',
+                        'pubg-gray': '#3a3a3a',
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slideInLeft': 'slideInLeft 0.8s ease-out forwards',
+                        'slideInRight': 'slideInRight 0.8s ease-out forwards',
+                        'slideInUp': 'slideInUp 0.8s ease-out forwards',
+                        'slideInDown': 'slideInDown 0.8s ease-out forwards',
+                        'fadeIn': 'fadeIn 0.8s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom PUBG-inspired styles */
+        .pubg-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
         }
-
-        :root {
-            --primary-glow: #667eea;
-            --secondary-glow: #764ba2;
-            --accent-glow: #f093fb;
-            --success-glow: #4facfe;
-            --warning-glow: #f6d365;
-            --danger-glow: #ff6b6b;
-            --neon-blue: #00f5ff;
-            --neon-pink: #ff006e;
-            --neon-green: #39ff14;
-            --neon-purple: #bf00ff;
-            --cyber-orange: #ff9500;
-            --quantum-gold: #ffd700;
-            --matrix-red: #ff0040;
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #1a1a2e;
-            --bg-card: #16213e;
-            --bg-glass: rgba(0, 0, 0, 0.3);
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-color: #475569;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --glow-primary: rgba(102, 126, 234, 0.5);
-            --glow-secondary: rgba(118, 75, 162, 0.5);
+        
+        .pubg-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
         }
-
-        body {
-            font-family: 'Rajdhani', 'Arial', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        .orbitron {
-            font-family: 'Orbitron', 'Courier New', monospace;
-        }
-
-        .exo {
-            font-family: 'Exo 2', 'Arial', sans-serif;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-green), var(--neon-purple));
-            background-size: 400% 100%;
-            animation: rainbow-flow 3s linear infinite;
-        }
-
-        @keyframes rainbow-flow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 15, 0.98);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-        }
-
-        .gaming-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            position: relative;
-        }
-
-        .gaming-logo::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
-            border-radius: 12px;
-            opacity: 0;
-            filter: blur(10px);
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .gaming-logo:hover::before {
-            opacity: 0.7;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 8px;
+        
+        .pubg-button {
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
             transition: all 0.3s ease;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
         }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::before {
-            opacity: 0.2;
-        }
-
-        .nav-link:hover::after {
-            width: 80%;
-        }
-
-        .nav-link:hover {
+        
+        .pubg-button:hover {
             transform: translateY(-2px);
-            color: #fff;
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.5);
         }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            color: white;
+        
+        .pubg-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .mobile-menu-btn {
-            display: none;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            color: var(--neon-blue);
-            padding: 0.75rem;
-            border-radius: 50px;
-            cursor: pointer;
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(241, 196, 15, 0.3); }
+            to { box-shadow: 0 0 20px rgba(241, 196, 15, 0.6); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
             transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
         }
-
-        .mobile-menu-btn:hover {
-            background: rgba(0, 245, 255, 0.2);
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown .dropdown-menu:hover {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            transition-delay: 0s !important;
+        }
+        
+        .dropdown {
+            padding-bottom: 10px;
+        }
+        
+        .dropdown:nth-last-child(-n+3) .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .dropdown:nth-last-child(-n+4) .dropdown-menu {
+                left: auto;
+                right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dropdown .dropdown-menu {
+                left: 0 !important;
+                right: auto !important;
+                width: 100vw;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        /* Hero background - desktop uses gaming setup, mobile uses same image optimized */
+        @media (min-width: 768px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=1080&fit=crop');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-section {
+                background: linear-gradient(rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.3)), 
+                            url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
             transform: scale(1.05);
         }
-
+        
         .mobile-menu {
-            display: none;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Toast notification styles */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 9999;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            background: linear-gradient(45deg, #10b981, #059669);
+        }
+        
+        .toast.error {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+        }
+        
+        /* Badge styles */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 20px;
+            margin: 2px;
         }
 
-        .mobile-menu.show {
-            display: block;
-        }
-
-        .mobile-menu a {
-            display: block;
-            padding: 16px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .mobile-menu a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 0;
-            background: var(--neon-blue);
-            transition: width 0.3s ease;
-        }
-
-        .mobile-menu a:hover::before {
-            width: 4px;
-        }
-
-        .mobile-menu a:hover {
-            background: var(--bg-glass);
-            transform: translateX(10px);
-            color: var(--neon-blue);
-        }
-
-        /* Holographic Effect */
-        .holographic {
-            background: linear-gradient(45deg, 
-                var(--neon-blue) 0%, 
-                var(--neon-pink) 25%, 
-                var(--neon-green) 50%, 
-                var(--neon-purple) 75%, 
-                var(--neon-blue) 100%);
-            background-size: 400% 400%;
-            animation: holographic-shift 3s ease infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes holographic-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        #copy {
-            cursor: pointer;
-        }
-
-        /* Main Container */
-        .main-container {
-            margin-top: 65px;
-            min-height: calc(100vh - 80px);
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
-        }
-
-        /* Blog Container */
+        /* Blog specific styles */
         .blog-container {
-            max-width: max-content;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
             display: grid;
             grid-template-columns: 1fr 300px;
             gap: 2rem;
             min-height: calc(100vh - 160px);
         }
 
-        /* Main Content Area */
         .blog-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
             border-radius: 20px;
             padding: 2rem;
             position: relative;
@@ -327,7 +301,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink), var(--neon-green));
+            background: linear-gradient(135deg, #f1c40f, #e6b800);
             opacity: 0.1;
             z-index: -1;
             border-radius: 22px;
@@ -337,13 +311,13 @@
         .blog-header {
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(241, 196, 15, 0.3);
         }
 
         .category-badge {
             display: inline-block;
-            background: rgba(0, 245, 255, 0.2);
-            color: var(--neon-blue);
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
             padding: 0.4rem 1rem;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -351,15 +325,16 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 1rem;
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            border: 1px solid rgba(241, 196, 15, 0.3);
         }
 
         .blog-title {
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: 900;
-            color: var(--text-primary);
+            color: #ffffff;
             margin-bottom: 1rem;
             line-height: 1.2;
+            font-family: 'Orbitron', monospace;
         }
 
         .blog-meta {
@@ -368,7 +343,7 @@
             gap: 2rem;
             margin-bottom: 1rem;
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            color: #cbd5e1;
             flex-wrap: wrap;
         }
 
@@ -378,9 +353,13 @@
             gap: 0.5rem;
         }
 
+        .meta-item i {
+            color: #f1c40f;
+        }
+
         .blog-excerpt {
             font-size: 1.1rem;
-            color: var(--text-secondary);
+            color: #cbd5e1;
             font-style: italic;
             line-height: 1.6;
             margin-bottom: 1.5rem;
@@ -390,15 +369,16 @@
         .blog-article {
             font-size: 1.05rem;
             line-height: 1.8;
-            color: var(--text-primary);
+            color: #ffffff;
         }
 
         .blog-article h2 {
-            color: var(--neon-blue);
+            color: #f1c40f;
             font-size: 1.4rem;
             font-weight: 700;
             margin: 2rem 0 1rem;
             position: relative;
+            font-family: 'Orbitron', monospace;
         }
 
         .blog-article h2::before {
@@ -408,14 +388,15 @@
             bottom: -5px;
             width: 50px;
             height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            background: linear-gradient(90deg, #f1c40f, #e6b800);
         }
 
         .blog-article h3 {
-            color: var(--neon-pink);
+            color: #ff6b35;
             font-size: 1.2rem;
             font-weight: 600;
             margin: 1.5rem 0 0.75rem;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .blog-article p {
@@ -425,7 +406,7 @@
 
         .blog-article ul, .blog-article ol {
             margin: 1rem 0 1.5rem 2rem;
-            color: var(--text-secondary);
+            color: #cbd5e1;
         }
 
         .blog-article li {
@@ -433,18 +414,18 @@
         }
 
         .blog-article blockquote {
-            background: rgba(0, 245, 255, 0.1);
-            border-left: 4px solid var(--neon-blue);
+            background: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #f1c40f;
             padding: 1rem 1.5rem;
             margin: 1.5rem 0;
             font-style: italic;
-            color: var(--text-secondary);
+            color: #cbd5e1;
             border-radius: 0 8px 8px 0;
         }
 
         .blog-article code {
-            background: var(--bg-secondary);
-            color: var(--neon-green);
+            background: #2d2d2d;
+            color: #f1c40f;
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: 'Orbitron', monospace;
@@ -459,8 +440,9 @@
         }
 
         .sidebar-widget {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
             border-radius: 16px;
             padding: 1.5rem;
             transition: transform 0.3s ease;
@@ -471,7 +453,7 @@
         }
 
         .widget-title {
-            color: var(--neon-blue);
+            color: #f1c40f;
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
@@ -482,7 +464,7 @@
 
         .related-post {
             padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+            border-bottom: 1px solid rgba(241, 196, 15, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -492,14 +474,14 @@
         }
 
         .related-post:hover {
-            background: rgba(0, 245, 255, 0.05);
+            background: rgba(241, 196, 15, 0.05);
             transform: translateX(5px);
             border-radius: 8px;
             padding: 0.75rem;
         }
 
         .related-title {
-            color: var(--text-primary);
+            color: #ffffff;
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
@@ -507,14 +489,15 @@
         }
 
         .related-meta {
-            color: var(--text-secondary);
+            color: #cbd5e1;
             font-size: 0.8rem;
         }
 
         /* Enhanced Pagination Controls */
         .pagination-controls {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
             border-radius: 16px;
             padding: 2rem;
             margin-top: 2rem;
@@ -527,8 +510,8 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            color: white;
+            background: linear-gradient(45deg, #f1c40f, #e6b800);
+            color: #1a1a1a;
             padding: 1rem 1.5rem;
             border-radius: 8px;
             text-decoration: none;
@@ -541,6 +524,7 @@
             overflow: hidden;
             border: none;
             cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .pagination-btn:disabled {
@@ -550,20 +534,20 @@
         }
 
         .pagination-btn:not(:disabled):hover {
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            background: linear-gradient(45deg, #e6b800, #d4ac0d);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(241, 196, 15, 0.4);
         }
 
         .pagination-info {
             text-align: center;
-            color: var(--text-secondary);
+            color: #cbd5e1;
         }
 
         .pagination-counter {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: #ffffff;
             margin-bottom: 0.5rem;
             font-family: 'Orbitron', monospace;
         }
@@ -579,26 +563,27 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--border-color);
+            background: #3a3a3a;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .dot.active {
-            background: var(--neon-blue);
+            background: #f1c40f;
             transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
         }
 
         .dot:hover:not(.active) {
-            background: var(--neon-pink);
+            background: #ff6b35;
             transform: scale(1.1);
         }
 
         /* Share Section */
         .share-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border: 1px solid #f1c40f;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.1);
             border-radius: 16px;
             padding: 2rem;
             margin-top: 2rem;
@@ -608,7 +593,7 @@
         .share-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: #f1c40f;
             margin-bottom: 1rem;
             font-family: 'Orbitron', monospace;
         }
@@ -631,17 +616,18 @@
             transition: all 0.3s ease;
             border: 1px solid transparent;
             cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
         }
 
-        .share-btn.facebook {
-            background: #1877f2;
+        .share-btn.whatsapp {
+            background: #25d366;
             color: white;
         }
 
-        .share-btn.facebook:hover {
-            background: #166fe5;
+        .share-btn.whatsapp:hover {
+            background: #22c55e;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
 
         .share-btn.twitter {
@@ -667,15 +653,15 @@
         }
 
         .share-btn.copy {
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            color: var(--neon-blue);
+            background: rgba(241, 196, 15, 0.1);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            color: #f1c40f;
         }
 
         .share-btn.copy:hover {
-            background: rgba(0, 245, 255, 0.2);
+            background: rgba(241, 196, 15, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.3);
         }
 
         /* Loading Animation */
@@ -685,7 +671,7 @@
             align-items: center;
             height: 300px;
             font-size: 1.2rem;
-            color: var(--neon-blue);
+            color: #f1c40f;
         }
 
         .loading i {
@@ -698,67 +684,96 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Table of Contents */
+        .blog-toc {
+            background: rgba(241, 196, 15, 0.05);
+            border: 1px solid rgba(241, 196, 15, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .animate-fade-in {
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .animate-delay-1 { animation-delay: 0.1s; }
-        .animate-delay-2 { animation-delay: 0.2s; }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+        .blog-toc h4 {
+            color: #f1c40f;
             margin-bottom: 1rem;
-            flex-wrap: wrap;
+            font-family: 'Orbitron', monospace;
         }
 
-        .footer-links a {
-            color: var(--text-secondary);
+        .blog-toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .blog-toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-toc a {
+            color: #cbd5e1;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: var(--neon-blue);
+        .blog-toc a:hover {
+            color: #f1c40f;
+        }
+
+        /* Highlight and Warning Boxes */
+        .highlight-box {
+            background: rgba(241, 196, 15, 0.1);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            color: #f1c40f;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-box h4 {
+            color: #ff6b35;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Blog Images */
+        .blog-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background: #1a1a1a;
+            border: 2px solid rgba(241, 196, 15, 0.3);
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .blog-image-small {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            background: #1a1a1a;
+            border: 2px solid rgba(241, 196, 15, 0.3);
+            border-radius: 15px;
+            margin: 1rem auto;
+            display: block;
+            object-fit: cover;
         }
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
             .blog-container {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -774,10 +789,12 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                overflow-x: auto;
             }
 
             .sidebar-widget {
                 padding: 1rem;
+                min-width: 280px;
             }
 
             .pagination-controls {
@@ -837,11 +854,6 @@
                 padding: 0.75rem 1rem;
                 font-size: 0.8rem;
             }
-
-            .footer-links {
-                flex-direction: row;
-                gap: 1rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -873,66 +885,159 @@
             }
         }
 
-        /* Selection */
+        /* Selection and Scrollbar */
         ::selection {
-            background: var(--neon-blue);
-            color: white;
+            background: #f1c40f;
+            color: #1a1a1a;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 12px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
+            background: #1a1a1a;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            background: linear-gradient(135deg, #f1c40f, #e6b800);
             border-radius: 6px;
         }
     </style>
 </head>
-<body>
+<body class="bg-pubg-dark text-white font-rajdhani overflow-x-hidden">
+    
     <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="gaming-logo">
-                <i class="logo-icon fa fa-blog"></i>
-                <span class="orbitron holographic" style="font-size: 1.25rem; font-weight: 700;">GameHub</span>
-            </a>
-
-            <div class="nav-links">
-                <a href="index.html" class="nav-link"><i class="fa-solid fa-house-user"></i> Home</a>
-                <a href="games.html" class="nav-link"><i class="fa fa-gamepad"></i> Games</a>
-                <a href="blogs.html" class="nav-link active"><i class="fa fa-blog"></i> Blogs</a>
-                <a href="index.html#about" class="nav-link"><i class="fa fa-address-card"></i> About</a>
-                <a href="index.html#contact" class="nav-link"><i class="fa fa-headset"></i> Contact Us</a>
+    <nav class="fixed top-0 w-full bg-pubg-dark/95 backdrop-blur-md border-b border-pubg-gold/30 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-pubg-gold rounded-full flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-orbitron font-bold text-pubg-gold">App Hub</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <div class="dropdown relative">
+                        <a href="index.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Home
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="PUBG/pubg.html" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            PUBG
+                        </a>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="index.html#apps" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Apps & Tools
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="index.html#apps" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Apps And Tools</a>
+                            <a href="canva.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Canva</a>
+                            <a href="capcut.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut</a>
+                            <a href="capcutDesktop.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Capcut Desktop</a>
+                            <a href="chatgpt.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Chatgpt</a>
+                            <a href="grammerly.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Grammerly</a>
+                            <a href="spotify.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Spotify</a>
+                            <a href="telegram.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Telegram</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="#blogs" class="text-pubg-gold hover:text-white transition-colors flex items-center">
+                            Blogs
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-pubg-dark-light rounded border border-pubg-gold/20">
+                            <a href="index.html#blogs" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">Latest Blogs</a>
+                            <a href="blogs.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors">All Blogs</a>
+                            <a href="blogs-view.html" class="block px-4 py-2 hover:bg-pubg-gold/10 transition-colors text-pubg-gold">Blog Viewer</a>
+                        </div>
+                    </div>
+                    <div class="dropdown relative">
+                        <a href="index.html#contact" class="text-white hover:text-pubg-gold transition-colors flex items-center">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button class="md:hidden relative" id="mobile-menu-btn">
+                    <svg class="w-6 h-6 hamburger-icon transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 cross-icon absolute top-0 left-0 opacity-0 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden mobile-menu fixed top-16 left-0 w-full h-screen bg-pubg-dark/95 backdrop-blur-md" id="mobile-menu">
+            <div class="p-4 space-y-2">
+                <div class="mobile-dropdown">
+                    <a href="index.html" class="block text-white hover:text-pubg-gold transition-colors py-3">Home</a>
+                </div>
 
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Home</a>
-            <a href="games.html">Games</a>
-            <a href="blogs.html" class="holographic active"><i class="fa fa-blog"></i> Blogs</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact Us</a>
+                <div class="mobile-dropdown">
+                    <a href="PUBG/pubg.html" class="block text-white hover:text-pubg-gold transition-colors py-3">PUBG</a>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="index.html#apps" class="flex-1 text-white hover:text-pubg-gold transition-colors py-3">Apps & Tools</a>
+                        <button class="mobile-dropdown-btn text-white hover:text-pubg-gold transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="index.html#apps" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">All Apps And Tools</a>
+                        <a href="canva.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Canva</a>
+                        <a href="capcut.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Capcut</a>
+                        <a href="capcutDesktop.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Capcut Desktop</a>
+                        <a href="chatgpt.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Chatgpt</a>
+                        <a href="grammerly.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Grammerly</a>
+                        <a href="spotify.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Spotify</a>
+                        <a href="telegram.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Telegram</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <div class="flex items-center justify-between">
+                        <a href="#blogs" class="flex-1 text-pubg-gold hover:text-white transition-colors py-3">Blogs</a>
+                        <button class="mobile-dropdown-btn text-pubg-gold hover:text-white transition-colors py-3 px-3">
+                            <i class="fas fa-chevron-down transition-transform text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-dropdown-menu hidden pl-4 space-y-2">
+                        <a href="index.html#blogs" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">Latest Blogs</a>
+                        <a href="blogs.html" class="block text-gray-300 hover:text-pubg-gold transition-colors py-2 text-sm">All Blogs</a>
+                        <a href="blogs-view.html" class="block text-pubg-gold hover:text-white transition-colors py-2 text-sm">Blog Viewer</a>
+                    </div>
+                </div>
+
+                <div class="mobile-dropdown">
+                    <a href="index.html#contact" class="block text-white hover:text-pubg-gold transition-colors py-3">Contact Us</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Main Container -->
-    <main class="main-container">
-        <div class="blog-container">
+    <main class="bg-pubg-dark pt-16">
+        <div class="blog-container py-8 px-4">
             <!-- Main Blog Content -->
             <article class="blog-content animate-fade-in">
                 <div id="loadingState" class="loading" style="display: none;">
                     <i class="fas fa-spinner"></i>
-                    <span>Loading neural data stream...</span>
+                    <span>Loading content...</span>
                 </div>
 
                 <div id="blogContent">
@@ -963,11 +1068,11 @@
 
                 <!-- Share Section -->
                 <div class="share-container">
-                    <h3 class="share-title holographic">Share This Article</h3>
+                    <h3 class="share-title">Share This Article</h3>
                     <div class="share-buttons">
-                        <button class="share-btn facebook" onclick="shareToWhatsapp()" title="Share on Facebook">
-                            <i class="fa-brands fa-whatsapp" style="color: rgb(37, 211, 102);"></i>
-                            <span >Whatsapp</span>
+                        <button class="share-btn whatsapp" onclick="shareToWhatsapp()" title="Share on WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
                         </button>
                         <button class="share-btn twitter" onclick="shareToTwitter()" title="Share on Twitter">
                             <i class="fab fa-twitter"></i>
@@ -989,7 +1094,7 @@
             <aside class="blog-sidebar">
                 <!-- Related Posts Widget -->
                 <div class="sidebar-widget animate-fade-in animate-delay-1">
-                    <h3 class="widget-title holographic"><i class="fas fa-layer-group"></i> Related Posts</h3>
+                    <h3 class="widget-title"><i class="fas fa-layer-group"></i> Related Posts</h3>
                     <div id="relatedPosts">
                         <!-- Dynamic related posts will be loaded here -->
                     </div>
@@ -997,13 +1102,13 @@
 
                 <!-- Quick Navigation Widget -->
                 <div class="sidebar-widget animate-fade-in animate-delay-2">
-                    <h3 class="widget-title holographic"><i class="fas fa-rocket"></i> Quick Access</h3>
-                    <div class="related-post" onclick="window.location.href='games.html'">
-                        <div class="related-title">🎮 Explore Game Zone</div>
-                        <div class="related-meta">Discover premium games</div>
+                    <h3 class="widget-title"><i class="fas fa-rocket"></i> Quick Access</h3>
+                    <div class="related-post" onclick="window.location.href='index.html#apps'">
+                        <div class="related-title">🚀 Explore Apps & Tools</div>
+                        <div class="related-meta">Discover premium apps</div>
                     </div>
                     <div class="related-post" onclick="window.location.href='index.html#contact'">
-                        <div class="related-title">📡 Contact Neural Hub</div>
+                        <div class="related-title">📧 Contact App Hub</div>
                         <div class="related-meta">Connect with us</div>
                     </div>
                     <div class="related-post" onclick="window.location.href='blogs.html'">
@@ -1016,248 +1121,865 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="games.html">Games</a>
-                <a href="blogs.html">All Blogs</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
+    <footer class="bg-pubg-dark border-t border-pubg-gold/30 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-pubg-gold rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-pubg-dark" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-orbitron font-bold text-pubg-gold">App Hub</h3>
+                            <p class="text-gray-400">100% free apps & tools</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Discover apps, tools, and blogs—100% free with no paywall, ad-light experience, and instant access to trusted tools.
+                    </p>
+                    
+                    <!-- Social Links -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">YouTube</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Discord</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pubg-gold transition-colors">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="index.html#apps" class="text-gray-400 hover:text-white transition-colors">Apps</a></li>
+                        <li><a href="blogs.html" class="text-gray-400 hover:text-white transition-colors">Blogs</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+                
+                <!-- More Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-pubg-gold mb-4">More</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#faqs" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="PUBG/pubg.html" class="text-gray-400 hover:text-white transition-colors">PUBG</a></li>
+                        <li><a href="index.html#blogs" class="text-gray-400 hover:text-white transition-colors">Latest Blogs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
-            <p style="color: var(--text-secondary);" class="holographic">
-                © 2025 GameHub Neural Network. All rights reserved. Powered by quantum computing.
-            </p>
+            
+            <!-- Copyright -->
+            <div class="border-t border-pubg-gold/30 mt-8 pt-4 text-center">
+                <p class="text-gray-400">
+                    © 2025 App Hub. All rights reserved.
+                </p>
+            </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Blog data
+        // EmailJS config (inherited from index.html)
+        const EMAILJS_CONFIG = {
+            serviceID: 'service_1qk5yez',
+            templateID: 'template_x6ik6xb',
+            autoReplyTemplateID: 'template_z3t4og8',
+            userID: 'WphZK_lgY2RgIe0HF'
+        };
+        
+        // Init state
+        let EMAILJS_READY = false;
+        
+        // Initialize EmailJS
+        function getTrimmedPublicKey() {
+            return (EMAILJS_CONFIG.userID || '').trim();
+        }
+        (function initEmailJS() {
+            const PUBLIC_KEY = getTrimmedPublicKey();
+            if (!PUBLIC_KEY) return;
+            try { emailjs.init({ publicKey: PUBLIC_KEY }); EMAILJS_READY = true; } catch (e) {}
+        })();
+
+        // Blog data with App Hub themed content
         const blogPosts = [
             {
                 id: 1,
-                title: "The Future of Gaming AI",
-                category: "Technology",
-                excerpt: "Exploring how artificial intelligence is revolutionizing game development and creating immersive player experiences through advanced neural networks and machine learning algorithms.",
+                title: "Best Free Apps 2025: Complete Guide",
+                category: "Apps & Tools",
+                excerpt: "Discover the top free applications that are revolutionizing productivity, creativity, and entertainment in 2025. Complete with download links and setup guides.",
                 date: "January 15, 2025",
-                author: "Alex Chen",
+                author: "App Hub Team",
                 readTime: "8 min read",
                 content: `
-                    <p>Artificial Intelligence is no longer a futuristic concept in gaming – it's actively reshaping how we create and experience digital entertainment. From sophisticated NPCs to procedural world generation, AI is becoming the invisible architect of our virtual adventures.</p>
+                    <p>The digital landscape of 2025 offers incredible free applications that rival premium software in functionality and design. Our comprehensive guide covers the essential apps you need for productivity, creativity, and entertainment.</p>
                     
-                    <h2>Neural Networks in Game Design</h2>
-                    <p>Modern game development leverages neural networks to create more realistic and responsive gaming environments. These systems can analyze player behavior patterns and adapt gameplay mechanics in real-time, creating personalized experiences that evolve with each gaming session.</p>
+                    <div class="blog-toc">
+                        <h4><i class="fas fa-list"></i> Table of Contents</h4>
+                        <ul>
+                            <li><a href="#productivity-apps">Productivity Applications</a></li>
+                            <li><a href="#creative-tools">Creative Tools</a></li>
+                            <li><a href="#entertainment-apps">Entertainment Apps</a></li>
+                            <li><a href="#communication-tools">Communication Tools</a></li>
+                            <li><a href="#developer-tools">Developer Tools</a></li>
+                        </ul>
+                    </div>
                     
-                    <blockquote>"AI doesn't replace creativity – it amplifies it. We're seeing developers use AI to handle repetitive tasks while focusing their energy on innovative storytelling and unique gameplay mechanics." - Dr. Sarah Martinez, AI Gaming Research</blockquote>
+                    <h2 id="productivity-apps">Productivity Applications</h2>
+                    <p>Modern productivity apps have evolved to offer enterprise-grade features without the enterprise price tag. These applications streamline workflows and boost efficiency across all industries.</p>
                     
-                    <h3>Procedural Content Generation</h3>
-                    <p>One of the most exciting applications is procedural content generation. AI algorithms can create vast worlds, populate them with diverse ecosystems, and even generate storylines that branch based on player choices. This technology enables infinite replayability and ensures no two gaming experiences are identical.</p>
-                    
-                    <h3>Advanced NPC Behavior</h3>
-                    <p>Gone are the days of predictable NPC patterns. Modern AI-driven characters exhibit complex behaviors, learn from player interactions, and develop unique personality traits over time. These virtual beings can:</p>
+                    <h3>Top Productivity Picks:</h3>
                     <ul>
-                        <li>Adapt their dialogue based on player history</li>
-                        <li>Form relationships and rivalries with other NPCs</li>
-                        <li>Remember past encounters and reference them in future interactions</li>
-                        <li>Develop emotional responses to world events</li>
+                        <li><strong>Notion</strong> - All-in-one workspace for notes, databases, and project management</li>
+                        <li><strong>Obsidian</strong> - Advanced note-taking with powerful linking and graph view</li>
+                        <li><strong>Todoist</strong> - Smart task management with natural language processing</li>
+                        <li><strong>Calendly</strong> - Seamless meeting scheduling and calendar integration</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                        <p>Combine multiple productivity tools for maximum efficiency. Use Notion for project planning, Obsidian for knowledge management, and Todoist for daily task tracking.</p>
+                    </div>
+                    
+                    <h2 id="creative-tools">Creative Tools</h2>
+                    <p>Creative professionals no longer need expensive software subscriptions. These free tools provide professional-grade capabilities for design, video editing, and content creation.</p>
+                    
+                    <h3>Essential Creative Applications:</h3>
+                    <ul>
+                        <li><strong>Canva</strong> - Comprehensive design platform with templates and collaboration features</li>
+                        <li><strong>GIMP</strong> - Advanced image editing with Photoshop-level capabilities</li>
+                        <li><strong>DaVinci Resolve</strong> - Professional video editing and color correction</li>
+                        <li><strong>Blender</strong> - Complete 3D creation suite for modeling, animation, and rendering</li>
                     </ul>
                     
-                    <h2>The Quantum Leap Forward</h2>
-                    <p>As we enter the quantum computing era, AI in gaming is poised for unprecedented growth. Quantum-enhanced algorithms will enable real-time physics simulations, weather patterns that affect gameplay, and AI opponents that learn and evolve continuously.</p>
+                    <blockquote>"The democratization of creative tools has enabled a new generation of artists and designers to compete with major studios." - Creative Industry Report 2025</blockquote>
                     
-                    <p>The future of gaming AI promises experiences so immersive and personalized that the line between virtual and reality becomes beautifully blurred. We're not just playing games – we're entering living, breathing digital universes that respond to our every action and emotion.</p>
+                    <h2 id="entertainment-apps">Entertainment Applications</h2>
+                    <p>Entertainment apps have transformed how we consume media, play games, and connect with content. These platforms offer premium experiences without subscription fees.</p>
+                    
+                    <h3>Must-Have Entertainment Apps:</h3>
+                    <ul>
+                        <li><strong>Spotify</strong> - Music streaming with personalized playlists and podcasts</li>
+                        <li><strong>YouTube</strong> - Video content platform with creator economy integration</li>
+                        <li><strong>Discord</strong> - Community platform for gaming, hobbies, and professional groups</li>
+                        <li><strong>Twitch</strong> - Live streaming platform for gaming and creative content</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Important Note</h4>
+                        <p>While these apps are free, some offer premium tiers with additional features. Choose upgrades based on your specific needs and usage patterns.</p>
+                    </div>
+                    
+                    <h2 id="communication-tools">Communication Tools</h2>
+                    <p>Modern communication extends beyond simple messaging. These applications provide comprehensive solutions for personal and professional interaction.</p>
+                    
+                    <h3>Communication Essentials:</h3>
+                    <ul>
+                        <li><strong>Telegram</strong> - Secure messaging with file sharing and channel features</li>
+                        <li><strong>Zoom</strong> - Video conferencing with screen sharing and recording</li>
+                        <li><strong>Slack</strong> - Team communication with integration capabilities</li>
+                        <li><strong>Signal</strong> - Privacy-focused messaging with end-to-end encryption</li>
+                    </ul>
+                    
+                    <h2 id="developer-tools">Developer Tools</h2>
+                    <p>The development ecosystem offers powerful free tools that support everything from code editing to deployment. These applications are essential for modern software development.</p>
+                    
+                    <h3>Developer Must-Haves:</h3>
+                    <ul>
+                        <li><strong>Visual Studio Code</strong> - Feature-rich code editor with extensive plugin ecosystem</li>
+                        <li><strong>Git</strong> - Version control system for tracking code changes</li>
+                        <li><strong>Docker</strong> - Containerization platform for application deployment</li>
+                        <li><strong>Postman</strong> - API development and testing environment</li>
+                    </ul>
+                    
+                    <p>The landscape of free applications continues to evolve, with new tools emerging regularly. Stay updated with App Hub for the latest recommendations and detailed guides on maximizing these powerful applications.</p>
                 `
             },
             {
                 id: 2,
-                title: "Quantum Graphics Revolution",
-                category: "Graphics",
-                excerpt: "Discover the breakthrough in quantum-enhanced graphics rendering that's changing the visual landscape of gaming with unprecedented realism and performance.",
+                title: "Canva Pro Tips: Design Like a Professional",
+                category: "Design",
+                excerpt: "Master Canva's advanced features and create stunning designs with these professional tips and tricks. Transform your visual content creation workflow.",
                 date: "January 12, 2025",
-                author: "Sarah Kim",
-                readTime: "6 min read",
+                author: "Design Expert",
+                readTime: "10 min read",
                 content: `
-                    <p>The gaming industry stands on the precipice of a visual revolution. Quantum-enhanced graphics processing is transforming how we render digital worlds, bringing photorealistic visuals and impossible performance improvements to mainstream gaming.</p>
+                    <p>Canva has revolutionized graphic design by making professional-quality design accessible to everyone. Whether you're creating social media content, business presentations, or marketing materials, these advanced techniques will elevate your designs.</p>
                     
-                    <h2>Quantum Ray Tracing</h2>
-                    <p>Traditional ray tracing requires enormous computational power, but quantum algorithms can calculate light behavior across infinite parallel dimensions simultaneously. This breakthrough enables real-time global illumination that was previously impossible.</p>
+                    <h2>Advanced Design Principles</h2>
+                    <p>Understanding core design principles is crucial for creating visually appealing content. These fundamentals guide professional designers and can transform your Canva creations.</p>
                     
-                    <h3>Revolutionary Rendering Pipeline</h3>
-                    <p>The quantum rendering pipeline processes graphics data through quantum superposition, allowing multiple rendering paths to be calculated concurrently. This results in:</p>
+                    <h3>The Rule of Thirds</h3>
+                    <p>Divide your design into nine equal sections with two horizontal and two vertical lines. Place important elements along these lines or at their intersections to create balanced, engaging compositions.</p>
+                    
+                    <h3>Color Psychology in Design</h3>
+                    <p>Colors evoke emotions and influence behavior. Use this knowledge strategically:</p>
                     <ul>
-                        <li>100x faster ray tracing calculations</li>
-                        <li>Perfect global illumination in real-time</li>
-                        <li>Dynamic lighting that responds to quantum fluctuations</li>
-                        <li>Volumetric effects with zero performance impact</li>
+                        <li><strong>Blue:</strong> Trust, professionalism, calm</li>
+                        <li><strong>Red:</strong> Energy, urgency, passion</li>
+                        <li><strong>Green:</strong> Growth, nature, money</li>
+                        <li><strong>Yellow:</strong> Optimism, creativity, attention</li>
+                        <li><strong>Purple:</strong> Luxury, creativity, mystery</li>
                     </ul>
                     
-                    <blockquote>"We're witnessing the birth of true photorealism in gaming. Quantum graphics don't just improve visual fidelity – they redefine what's possible in real-time rendering." - Marcus Rodriguez, Quantum Graphics Institute</blockquote>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-palette"></i> Color Combination Tips</h4>
+                        <p>Use Canva's color palette generator to create harmonious color schemes. Start with one primary color and let Canva suggest complementary colors for professional results.</p>
+                    </div>
                     
-                    <h2>Holographic Display Integration</h2>
-                    <p>Quantum graphics naturally complement holographic display technology, creating three-dimensional gaming experiences that extend beyond traditional screens. Players can literally step inside their favorite games, interacting with quantum-rendered environments in full 360-degree immersion.</p>
+                    <h2>Typography Mastery</h2>
+                    <p>Typography can make or break your design. Professional designers follow specific rules for font selection and text hierarchy.</p>
                     
-                    <h3>The Neural Connection</h3>
-                    <p>When combined with neural interface technology, quantum graphics create visual experiences indistinguishable from reality. The quantum processing power enables direct visual cortex stimulation, bypassing traditional display limitations entirely.</p>
+                    <h3>Font Pairing Guidelines</h3>
+                    <p>Combine fonts with different personalities while maintaining harmony:</p>
+                    <ul>
+                        <li>Pair a serif font with a clean sans-serif</li>
+                        <li>Use script fonts sparingly for accent text</li>
+                        <li>Maintain consistent font weights throughout your design</li>
+                        <li>Ensure sufficient contrast between text and background</li>
+                    </ul>
                     
-                    <p>As quantum graphics technology matures, we're entering an era where the visual quality of games will be limited only by our imagination, not our hardware capabilities.</p>
+                    <blockquote>"Good typography is invisible – it serves the content without drawing attention to itself." - Professional Design Principles</blockquote>
+                    
+                    <h2>Brand Consistency Strategies</h2>
+                    <p>Maintaining brand consistency across all your designs builds recognition and trust. Canva's brand kit features make this process seamless.</p>
+                    
+                    <h3>Building Your Brand Kit</h3>
+                    <ul>
+                        <li>Upload your logo in multiple formats (PNG, SVG)</li>
+                        <li>Define primary and secondary color palettes</li>
+                        <li>Select brand fonts for headers and body text</li>
+                        <li>Create template layouts for recurring content types</li>
+                    </ul>
+                    
+                    <h2>Advanced Canva Features</h2>
+                    <p>Unlock Canva's full potential with these lesser-known features that professional designers rely on.</p>
+                    
+                    <h3>Magic Resize and Format Optimization</h3>
+                    <p>Save time by creating one design and automatically resizing it for multiple platforms. Canva's magic resize feature maintains design integrity across different dimensions.</p>
+                    
+                    <h3>Animation and Motion Graphics</h3>
+                    <p>Add professional animation to your designs:</p>
+                    <ul>
+                        <li>Use subtle entrance animations for text elements</li>
+                        <li>Apply consistent animation timing across elements</li>
+                        <li>Keep animations purposeful and not distracting</li>
+                        <li>Test animations on different devices for optimal performance</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-circle"></i> Design Best Practices</h4>
+                        <p>Always consider your audience and platform requirements. What works for Instagram might not work for LinkedIn. Adapt your designs to match the context and user expectations.</p>
+                    </div>
+                    
+                    <h2>Workflow Optimization</h2>
+                    <p>Streamline your design process with these professional workflow techniques that save time and improve consistency.</p>
+                    
+                    <h3>Template Creation Strategy</h3>
+                    <ul>
+                        <li>Create master templates for recurring design needs</li>
+                        <li>Use consistent spacing and alignment grids</li>
+                        <li>Build a library of reusable design elements</li>
+                        <li>Organize projects with clear naming conventions</li>
+                    </ul>
+                    
+                    <p>Master these techniques and you'll create designs that compete with professional design agencies. Remember, great design is not just about aesthetics – it's about effective communication and problem-solving.</p>
                 `
             },
             {
                 id: 3,
-                title: "Neural Interface Gaming",
-                category: "Innovation",
-                excerpt: "How brain-computer interfaces are opening new dimensions in player control and immersive gameplay mechanics, ushering in the next evolution of gaming input.",
+                title: "PUBG Mobile: Ultimate Strategy Guide",
+                category: "Gaming",
+                excerpt: "Dominate the battleground with advanced strategies, weapon guides, and pro tips from top-ranked players. Complete PUBG Mobile mastery guide.",
                 date: "January 10, 2025",
-                author: "Marcus Rivera",
-                readTime: "10 min read",
+                author: "Gaming Pro",
+                readTime: "12 min read",
                 content: `
-                    <p>The dream of controlling games with pure thought is becoming reality. Neural interface technology is revolutionizing gaming input, creating unprecedented levels of immersion and accessibility that were once confined to science fiction.</p>
+                    <p>PUBG Mobile continues to be one of the most competitive battle royale games, requiring skill, strategy, and adaptability to achieve consistent wins. This comprehensive guide covers everything from basic mechanics to advanced professional strategies.</p>
                     
-                    <h2>Direct Neural Input</h2>
-                    <p>Modern brain-computer interfaces can interpret neural signals with remarkable precision, translating thoughts into game actions faster than traditional input methods. This technology opens gaming to players with physical disabilities while enhancing the experience for all users.</p>
+                    <div class="blog-toc">
+                        <h4><i class="fas fa-gamepad"></i> Strategy Sections</h4>
+                        <ul>
+                            <li><a href="#landing-strategy">Landing Strategy</a></li>
+                            <li><a href="#weapon-mastery">Weapon Mastery</a></li>
+                            <li><a href="#positioning">Positioning & Rotation</a></li>
+                            <li><a href="#endgame">Endgame Tactics</a></li>
+                            <li><a href="#team-play">Team Coordination</a></li>
+                        </ul>
+                    </div>
                     
-                    <h3>Thought-Speed Gaming</h3>
-                    <p>Neural interfaces eliminate the delay between thought and action. Professional esports players using neural interfaces demonstrate reaction times approaching the theoretical limits of human consciousness. This creates new categories of competitive gaming where mental agility becomes as important as physical dexterity.</p>
+                    <h2 id="landing-strategy">Landing Strategy</h2>
+                    <p>Your landing choice determines the entire match flow. Professional players make calculated decisions based on flight path, competition density, and loot requirements.</p>
                     
-                    <blockquote>"Neural gaming isn't just about faster inputs – it's about creating a direct pathway between imagination and digital reality. Players don't just control characters; they become them." - Dr. Elena Vasquez, Neurogaming Research Lab</blockquote>
-                    
-                    <h2>Emotion-Responsive Environments</h2>
-                    <p>Advanced neural interfaces can detect emotional states, allowing games to respond dynamically to player feelings. Environments might become more challenging when players feel confident, or provide comfort during moments of frustration.</p>
-                    
-                    <h3>Memory Palace Gaming</h3>
-                    <p>Neural interfaces can tap into human memory patterns, creating games that adapt to personal experiences and learning styles. Players might encounter familiar locations reconstructed from their memories, or face challenges tailored to their cognitive strengths.</p>
-                    
+                    <h3>Hot Drop vs. Safe Landing</h3>
                     <ul>
-                        <li>Biometric feedback integration for health monitoring</li>
-                        <li>Dream-state gaming during sleep cycles</li>
-                        <li>Shared consciousness multiplayer experiences</li>
-                        <li>Therapeutic applications for cognitive rehabilitation</li>
+                        <li><strong>Hot Drops:</strong> High-risk, high-reward locations with premium loot but intense early fighting</li>
+                        <li><strong>Safe Landings:</strong> Lower competition areas allowing for safer looting and positioning</li>
+                        <li><strong>Edge Landings:</strong> Peripheral locations offering rotation advantages</li>
                     </ul>
                     
-                    <h2>The Ethical Frontier</h2>
-                    <p>As neural gaming technology advances, we must carefully consider privacy, consent, and the psychological impact of direct brain-computer interaction. The future of neural gaming will require robust ethical frameworks to protect player autonomy while enabling incredible new experiences.</p>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-target"></i> Pro Landing Tips</h4>
+                        <p>Always land near a vehicle spawn. Mobility in PUBG Mobile is crucial for rotation and avoiding the blue zone. Plan your landing with escape routes in mind.</p>
+                    </div>
                     
-                    <p>Neural interface gaming represents humanity's next evolutionary step in digital entertainment, where the boundary between mind and machine dissolves into pure, unfiltered experience.</p>
+                    <h3>Loot Prioritization</h3>
+                    <p>Efficient looting separates professional players from casual gamers:</p>
+                    <ul>
+                        <li>Prioritize weapons and ammunition first</li>
+                        <li>Secure level 2+ armor and helmet immediately</li>
+                        <li>Collect essential healing items (first aid kits, energy drinks)</li>
+                        <li>Find optical attachments for medium-range engagements</li>
+                    </ul>
+                    
+                    <h2 id="weapon-mastery">Weapon Mastery</h2>
+                    <p>Understanding weapon characteristics, recoil patterns, and optimal engagement ranges is fundamental to PUBG Mobile success.</p>
+                    
+                    <h3>Assault Rifle Tier List</h3>
+                    <ul>
+                        <li><strong>AKM:</strong> High damage, manageable recoil with practice</li>
+                        <li><strong>M416:</strong> Versatile with excellent attachment support</li>
+                        <li><strong>SCAR-L:</strong> Low recoil, ideal for beginners</li>
+                        <li><strong>M762:</strong> High damage but requires recoil control mastery</li>
+                    </ul>
+                    
+                    <h3>Sniper Rifle Strategies</h3>
+                    <p>Sniper rifles provide long-range elimination capabilities but require precise positioning and timing:</p>
+                    <ul>
+                        <li>AWM: One-shot potential to level 2 helmets</li>
+                        <li>Kar98k: Excellent damage with availability balance</li>
+                        <li>M24: High damage with faster reload than Kar98k</li>
+                    </ul>
+                    
+                    <blockquote>"Weapon mastery isn't just about aiming – it's about understanding when and where to engage based on your loadout capabilities." - PUBG Mobile Pro Player</blockquote>
+                    
+                    <h2 id="positioning">Positioning & Rotation</h2>
+                    <p>Positioning determines your survival probability and engagement success rate. Professional players prioritize positioning over aggressive plays.</p>
+                    
+                    <h3>Zone Management</h3>
+                    <ul>
+                        <li>Always move ahead of the blue zone, never behind it</li>
+                        <li>Use vehicles for early rotations, then proceed on foot</li>
+                        <li>Control high ground positions when possible</li>
+                        <li>Avoid open field crossings during late game</li>
+                    </ul>
+                    
+                    <h3>Cover Utilization</h3>
+                    <p>Effective cover usage involves understanding concealment vs. protection:</p>
+                    <ul>
+                        <li><strong>Hard Cover:</strong> Rocks, buildings, vehicles that stop bullets</li>
+                        <li><strong>Soft Cover:</strong> Trees, grass that provide concealment only</li>
+                        <li><strong>Temporary Cover:</strong> Smoke grenades for repositioning</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Common Positioning Mistakes</h4>
+                        <p>Avoid staying in the blue zone too long, fighting in open areas without cover, and ignoring flanking routes. These mistakes are easily punished by experienced players.</p>
+                    </div>
+                    
+                    <h2 id="endgame">Endgame Tactics</h2>
+                    <p>The final circles require different strategies than early game. Patience, positioning, and smart decision-making become paramount.</p>
+                    
+                    <h3>Final Circle Strategies</h3>
+                    <ul>
+                        <li>Identify center positions early and secure them</li>
+                        <li>Use throwables to control areas and force movement</li>
+                        <li>Prioritize survival over eliminations</li>
+                        <li>Listen carefully for enemy movement and healing sounds</li>
+                    </ul>
+                    
+                    <h3>Equipment for Endgame</h3>
+                    <p>Endgame requires specific equipment priorities:</p>
+                    <ul>
+                        <li>Maximum healing items (medkits, first aid)</li>
+                        <li>Throwables (frags, smokes) for area control</li>
+                        <li>Scoped weapons for final circle engagements</li>
+                        <li>Level 3 gear if available for maximum protection</li>
+                    </ul>
+                    
+                    <h2 id="team-play">Team Coordination</h2>
+                    <p>Squad gameplay requires communication, role assignment, and coordinated strategies that differ significantly from solo play.</p>
+                    
+                    <h3>Role Assignments</h3>
+                    <ul>
+                        <li><strong>IGL (In-Game Leader):</strong> Makes strategic decisions and callouts</li>
+                        <li><strong>Support:</strong> Focuses on healing and utility items</li>
+                        <li><strong>Fragger:</strong> Takes aggressive positions and eliminates enemies</li>
+                        <li><strong>Sniper:</strong> Provides long-range cover and intelligence</li>
+                    </ul>
+                    
+                    <h3>Communication Protocols</h3>
+                    <p>Effective communication wins matches:</p>
+                    <ul>
+                        <li>Use precise callouts with compass directions</li>
+                        <li>Share loot information and requests clearly</li>
+                        <li>Coordinate movement and engagement timing</li>
+                        <li>Maintain calm communication during intense fights</li>
+                    </ul>
+                    
+                    <p>Mastering PUBG Mobile requires dedication, practice, and strategic thinking. Apply these professional strategies consistently, and you'll see significant improvement in your rank and win rate. Remember, every match is a learning opportunity – analyze your gameplay and adapt your strategies accordingly.</p>
                 `
             },
             {
                 id: 4,
-                title: "Metaverse Gaming Ecosystems",
-                category: "Metaverse",
-                excerpt: "Building interconnected virtual worlds where players can seamlessly transition between different gaming universes, creating persistent digital spaces for infinite exploration.",
+                title: "Video Editing Mastery with CapCut",
+                category: "Creative",
+                excerpt: "Learn professional video editing techniques using CapCut's powerful features. Create stunning videos for social media, YouTube, and professional projects.",
                 date: "January 8, 2025",
-                author: "Luna Park",
-                readTime: "7 min read",
+                author: "Video Expert",
+                readTime: "9 min read",
                 content: `
-                    <p>The metaverse isn't just a buzzword – it's the fundamental reimagining of digital spaces as persistent, interconnected realities. Gaming ecosystems are leading this transformation, creating universes where players build lasting identities and relationships that transcend individual titles.</p>
+                    <p>CapCut has emerged as the leading free video editing platform, offering professional-grade features that rival expensive software. This comprehensive guide will transform your video editing skills from beginner to professional level.</p>
                     
-                    <h2>Cross-Reality Character Persistence</h2>
-                    <p>Imagine creating a character in one game and seamlessly bringing their skills, achievements, and relationships into entirely different virtual worlds. Metaverse gaming ecosystems make this possible through standardized character protocols and universal progression systems.</p>
+                    <h2>Essential Editing Fundamentals</h2>
+                    <p>Understanding basic editing principles is crucial before diving into advanced techniques. These fundamentals apply to all video editing software but are particularly important in CapCut.</p>
                     
-                    <h3>Universal Digital Identities</h3>
-                    <p>Players develop rich digital personas that evolve across multiple game universes. These identities carry reputation, relationships, and accumulated wisdom from countless adventures, creating meaningful continuity in digital experiences.</p>
-                    
-                    <blockquote>"The metaverse gaming ecosystem isn't about one perfect virtual world – it's about infinite interconnected realities where every choice matters and every relationship persists." - Dr. Kenji Nakamura, Virtual Worlds Institute</blockquote>
-                    
-                    <h2>Economic Interdependence</h2>
-                    <p>Metaverse gaming ecosystems feature interconnected economies where actions in one game affect markets in others. Crafting materials from a fantasy RPG might be valuable resources in a sci-fi space exploration game, creating complex trade networks across reality boundaries.</p>
-                    
-                    <h3>Persistent World Events</h3>
-                    <p>Major events ripple across connected game universes, creating shared history and collective memory. A war in one realm might refugee NPCs fleeing to safety in neighboring games, while scientific discoveries unlock new technologies across multiple titles.</p>
-                    
+                    <h3>Timeline Organization</h3>
+                    <p>Organize your timeline for efficient editing:</p>
                     <ul>
-                        <li>Seamless avatar transfer between compatible games</li>
-                        <li>Cross-game guilds and social structures</li>
-                        <li>Shared achievement and progression systems</li>
-                        <li>Universal virtual currency and asset ownership</li>
+                        <li>Place main footage on the primary video track</li>
+                        <li>Use upper tracks for overlays, text, and graphics</li>
+                        <li>Keep audio tracks organized by type (dialogue, music, effects)</li>
+                        <li>Color-code different content types for quick identification</li>
                     </ul>
                     
-                    <h2>Social Architecture</h2>
-                    <p>Metaverse gaming ecosystems prioritize social interaction and community building. Players don't just visit these worlds – they inhabit them, forming lasting bonds and collaborative relationships that extend beyond gaming sessions.</p>
+                    <h3>Cutting and Trimming Techniques</h3>
+                    <p>Precision in cutting separates amateur from professional edits:</p>
+                    <ul>
+                        <li>Cut on action to maintain visual continuity</li>
+                        <li>Use J-cuts and L-cuts for smooth dialogue transitions</li>
+                        <li>Remove dead space and unnecessary pauses</li>
+                        <li>Match audio and video cut points carefully</li>
+                    </ul>
                     
-                    <p>As these ecosystems mature, we're creating digital civilizations where players become citizens of infinite realities, building legacies that persist across virtual eternities.</p>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-scissors"></i> Pro Cutting Tip</h4>
+                        <p>Always cut slightly before and after the desired action. This gives you flexibility to fine-tune timing during the editing process.</p>
+                    </div>
+                    
+                    <h2>Advanced Visual Effects</h2>
+                    <p>CapCut offers sophisticated visual effects that can transform ordinary footage into professional-quality content.</p>
+                    
+                    <h3>Color Grading and Correction</h3>
+                    <p>Color work is essential for professional-looking videos:</p>
+                    <ul>
+                        <li><strong>Correction:</strong> Fix exposure, white balance, and contrast issues</li>
+                        <li><strong>Grading:</strong> Create mood and style through color manipulation</li>
+                        <li><strong>Consistency:</strong> Match colors across different clips and scenes</li>
+                        <li><strong>LUTs:</strong> Use Look-Up Tables for instant professional color grades</li>
+                    </ul>
+                    
+                    <h3>Motion Graphics and Animation</h3>
+                    <p>Add professional motion to your videos:</p>
+                    <ul>
+                        <li>Use keyframes for smooth position and scale animations</li>
+                        <li>Apply easing curves for natural motion feel</li>
+                        <li>Create lower thirds and title animations</li>
+                        <li>Design animated logos and brand elements</li>
+                    </ul>
+                    
+                    <blockquote>"Great video editing is invisible – the audience should be immersed in the story, not distracted by the technique." - Professional Film Editor</blockquote>
+                    
+                    <h2>Audio Excellence</h2>
+                    <p>Audio quality often determines whether viewers stay engaged with your content. CapCut provides powerful audio tools for professional results.</p>
+                    
+                    <h3>Audio Mixing Principles</h3>
+                    <ul>
+                        <li>Keep dialogue levels consistent around -12dB</li>
+                        <li>Use background music at -20dB to -25dB</li>
+                        <li>Apply noise reduction to clean up audio recordings</li>
+                        <li>Use audio ducking to automatically lower music during speech</li>
+                    </ul>
+                    
+                    <h3>Sound Design Elements</h3>
+                    <p>Enhance your videos with strategic sound design:</p>
+                    <ul>
+                        <li>Add ambient sounds to create atmosphere</li>
+                        <li>Use sound effects to emphasize visual actions</li>
+                        <li>Layer multiple audio tracks for rich soundscapes</li>
+                        <li>Sync audio effects precisely with visual events</li>
+                    </ul>
+                    
+                    <h2>Platform-Specific Optimization</h2>
+                    <p>Different platforms require different approaches to maximize engagement and quality.</p>
+                    
+                    <h3>Social Media Formats</h3>
+                    <ul>
+                        <li><strong>Instagram Reels:</strong> 9:16 aspect ratio, 15-30 seconds, vertical orientation</li>
+                        <li><strong>YouTube Shorts:</strong> 9:16 aspect ratio, up to 60 seconds, engaging thumbnails</li>
+                        <li><strong>TikTok:</strong> 9:16 aspect ratio, trending sounds, quick cuts</li>
+                        <li><strong>YouTube Long-form:</strong> 16:9 aspect ratio, detailed content, chapter markers</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-mobile-alt"></i> Mobile Optimization</h4>
+                        <p>Always preview your videos on mobile devices. Most viewers watch on phones, so ensure text is readable and visuals are clear on small screens.</p>
+                    </div>
+                    
+                    <h3>Export Settings</h3>
+                    <p>Optimize your export settings for different platforms:</p>
+                    <ul>
+                        <li>Use H.264 codec for best compatibility</li>
+                        <li>Set bitrate based on platform requirements</li>
+                        <li>Choose appropriate resolution (1080p for most platforms)</li>
+                        <li>Maintain consistent frame rate throughout the project</li>
+                    </ul>
+                    
+                    <h2>Professional Workflow Tips</h2>
+                    <p>Develop efficient workflows to increase productivity and maintain consistent quality across projects.</p>
+                    
+                    <h3>Project Organization</h3>
+                    <ul>
+                        <li>Create folders for raw footage, audio, graphics, and exports</li>
+                        <li>Use consistent naming conventions for easy file management</li>
+                        <li>Backup projects regularly to prevent data loss</li>
+                        <li>Document your editing decisions for future reference</li>
+                    </ul>
+                    
+                    <h3>Keyboard Shortcuts Mastery</h3>
+                    <p>Learn essential shortcuts to speed up your editing workflow:</p>
+                    <ul>
+                        <li>Space bar: Play/pause timeline</li>
+                        <li>Ctrl+Z: Undo last action</li>
+                        <li>Ctrl+C/Ctrl+V: Copy and paste clips</li>
+                        <li>Delete: Remove selected clips</li>
+                    </ul>
+                    
+                    <p>Video editing mastery comes through practice and experimentation. Start with these fundamentals, then develop your unique style. Remember, the best edits serve the story – technical skills should enhance, not overshadow, your content's message.</p>
                 `
             },
             {
                 id: 5,
-                title: "Cybersecurity in Gaming",
-                category: "Security",
-                excerpt: "Protecting player data and ensuring secure gaming environments in an increasingly connected digital world through advanced encryption and anti-cheat systems.",
+                title: "AI Revolution: ChatGPT and Beyond",
+                category: "Technology",
+                excerpt: "Explore how AI tools like ChatGPT are transforming work, creativity, and daily life. Complete guide to AI adoption and practical applications.",
                 date: "January 5, 2025",
-                author: "David Torres",
-                readTime: "9 min read",
+                author: "AI Specialist",
+                readTime: "11 min read",
                 content: `
-                    <p>As gaming becomes increasingly connected and valuable digital assets proliferate, cybersecurity has evolved from an afterthought to a cornerstone of game development. Modern gaming environments face sophisticated threats requiring military-grade protection systems.</p>
+                    <p>Artificial Intelligence has moved from science fiction to daily reality. ChatGPT and similar AI tools are revolutionizing how we work, create, and solve problems. This comprehensive guide explores the AI landscape and practical applications for personal and professional use.</p>
                     
-                    <h2>Quantum Encryption Protocols</h2>
-                    <p>Traditional encryption methods are becoming obsolete in the face of quantum computing threats. Gaming platforms now implement quantum-resistant encryption algorithms that protect player data even against future technological advances.</p>
+                    <div class="blog-toc">
+                        <h4><i class="fas fa-robot"></i> AI Topics</h4>
+                        <ul>
+                            <li><a href="#ai-fundamentals">Understanding AI Fundamentals</a></li>
+                            <li><a href="#chatgpt-mastery">ChatGPT Mastery</a></li>
+                            <li><a href="#productivity-ai">AI for Productivity</a></li>
+                            <li><a href="#creative-ai">Creative AI Applications</a></li>
+                            <li><a href="#future-trends">Future AI Trends</a></li>
+                        </ul>
+                    </div>
                     
-                    <h3>Zero-Knowledge Authentication</h3>
-                    <p>Players can now authenticate their identity without revealing sensitive information. Zero-knowledge proofs allow secure login while maintaining complete privacy, protecting personal data from both malicious actors and overzealous data collection.</p>
+                    <h2 id="ai-fundamentals">Understanding AI Fundamentals</h2>
+                    <p>Modern AI operates on large language models trained on vast datasets. Understanding these fundamentals helps you leverage AI tools more effectively.</p>
                     
-                    <blockquote>"Gaming security isn't just about preventing cheating – it's about protecting digital lives. Players invest thousands of hours and real money in virtual identities that deserve the same protection as physical assets." - Rebecca Chen, Cybersecurity Gaming Alliance</blockquote>
-                    
-                    <h2>AI-Powered Threat Detection</h2>
-                    <p>Machine learning algorithms continuously monitor gaming environments for suspicious behavior, identifying cheaters, bots, and security threats in real-time. These systems learn from millions of player interactions to distinguish between legitimate and malicious activity.</p>
-                    
-                    <h3>Behavioral Analysis Systems</h3>
-                    <p>Advanced security systems build behavioral profiles for each player, detecting anomalies that might indicate account compromise or unauthorized access. This creates personalized security that adapts to individual play patterns.</p>
-                    
+                    <h3>Types of AI Tools</h3>
                     <ul>
-                        <li>Real-time cheat detection and prevention</li>
-                        <li>Secure virtual asset trading platforms</li>
-                        <li>Privacy-preserving player analytics</li>
-                        <li>Distributed denial-of-service protection</li>
+                        <li><strong>Conversational AI:</strong> ChatGPT, Claude, Gemini for dialogue and reasoning</li>
+                        <li><strong>Image Generation:</strong> DALL-E, Midjourney, Stable Diffusion for visual creation</li>
+                        <li><strong>Code Generation:</strong> GitHub Copilot, CodeWhisperer for programming assistance</li>
+                        <li><strong>Audio AI:</strong> ElevenLabs, Murf for voice synthesis and audio processing</li>
                     </ul>
                     
-                    <h2>Blockchain Gaming Security</h2>
-                    <p>Blockchain technology provides immutable ownership records for digital assets while maintaining player privacy through advanced cryptographic techniques. Smart contracts ensure fair gameplay and transparent economic transactions.</p>
+                    <h3>AI Capabilities and Limitations</h3>
+                    <p>Understanding what AI can and cannot do prevents unrealistic expectations:</p>
+                    <ul>
+                        <li><strong>Strengths:</strong> Pattern recognition, content generation, data analysis, language translation</li>
+                        <li><strong>Limitations:</strong> Real-time information, factual accuracy, emotional understanding, creative originality</li>
+                    </ul>
                     
-                    <h3>Decentralized Identity Management</h3>
-                    <p>Players control their own identity data through decentralized systems, reducing the risk of massive data breaches while enabling seamless cross-platform experiences.</p>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-brain"></i> AI Interaction Principle</h4>
+                        <p>AI tools work best with specific, well-structured prompts. Think of AI as a highly capable assistant that needs clear instructions to deliver optimal results.</p>
+                    </div>
                     
-                    <p>The future of gaming security lies in proactive, adaptive systems that protect player privacy while fostering fair, competitive environments where skill and creativity triumph over malicious exploitation.</p>
+                    <h2 id="chatgpt-mastery">ChatGPT Mastery Techniques</h2>
+                    <p>Mastering ChatGPT requires understanding prompt engineering, conversation management, and strategic application of its capabilities.</p>
+                    
+                    <h3>Advanced Prompt Engineering</h3>
+                    <p>Craft prompts that consistently produce high-quality outputs:</p>
+                    <ul>
+                        <li><strong>Context Setting:</strong> Provide background information and specific requirements</li>
+                        <li><strong>Role Definition:</strong> Ask ChatGPT to assume expert roles for specialized knowledge</li>
+                        <li><strong>Output Format:</strong> Specify desired format (lists, paragraphs, tables, code)</li>
+                        <li><strong>Examples:</strong> Include examples of desired outputs for clarity</li>
+                    </ul>
+                    
+                    <h3>Conversation Strategy</h3>
+                    <p>Structure conversations for maximum effectiveness:</p>
+                    <ul>
+                        <li>Start with broad context, then narrow to specific questions</li>
+                        <li>Ask follow-up questions to refine and improve responses</li>
+                        <li>Use conversation memory to build on previous interactions</li>
+                        <li>Request critiques and alternative perspectives on AI outputs</li>
+                    </ul>
+                    
+                    <blockquote>"The quality of AI outputs directly correlates with the quality of human inputs. Master the art of asking, and AI becomes infinitely more powerful." - AI Researcher</blockquote>
+                    
+                    <h2 id="productivity-ai">AI for Productivity Enhancement</h2>
+                    <p>AI tools can dramatically increase productivity across various professional tasks when applied strategically.</p>
+                    
+                    <h3>Writing and Communication</h3>
+                    <ul>
+                        <li><strong>Email Drafting:</strong> Generate professional emails for different contexts</li>
+                        <li><strong>Document Creation:</strong> Produce reports, proposals, and presentations</li>
+                        <li><strong>Content Editing:</strong> Improve clarity, tone, and structure of existing text</li>
+                        <li><strong>Translation:</strong> Communicate across language barriers effectively</li>
+                    </ul>
+                    
+                    <h3>Research and Analysis</h3>
+                    <p>Leverage AI for comprehensive research workflows:</p>
+                    <ul>
+                        <li>Summarize lengthy documents and articles</li>
+                        <li>Analyze data patterns and extract insights</li>
+                        <li>Generate research questions and hypotheses</li>
+                        <li>Create structured research plans and methodologies</li>
+                    </ul>
+                    
+                    <h3>Project Management</h3>
+                    <ul>
+                        <li>Break down complex projects into manageable tasks</li>
+                        <li>Create realistic timelines and resource estimates</li>
+                        <li>Generate risk assessments and mitigation strategies</li>
+                        <li>Develop communication plans for stakeholders</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-shield-alt"></i> AI Ethics and Responsibility</h4>
+                        <p>Always verify AI-generated information, especially for critical decisions. Use AI to augment human judgment, not replace it entirely.</p>
+                    </div>
+                    
+                    <h2 id="creative-ai">Creative AI Applications</h2>
+                    <p>AI opens new possibilities for creative expression and content creation across multiple mediums.</p>
+                    
+                    <h3>Content Creation</h3>
+                    <ul>
+                        <li><strong>Blog Writing:</strong> Generate ideas, outlines, and draft content</li>
+                        <li><strong>Social Media:</strong> Create engaging posts and captions</li>
+                        <li><strong>Video Scripts:</strong> Develop compelling narratives and dialogue</li>
+                        <li><strong>Marketing Copy:</strong> Generate persuasive sales and promotional content</li>
+                    </ul>
+                    
+                    <h3>Visual Creative Process</h3>
+                    <p>Integrate AI into visual creative workflows:</p>
+                    <ul>
+                        <li>Generate concept art and mood boards</li>
+                        <li>Create variations of existing designs</li>
+                        <li>Develop color palettes and style guides</li>
+                        <li>Produce placeholder content for layouts</li>
+                    </ul>
+                    
+                    <h3>Musical and Audio Applications</h3>
+                    <ul>
+                        <li>Compose melodies and chord progressions</li>
+                        <li>Generate lyrics for songs and jingles</li>
+                        <li>Create voice-overs and narrations</li>
+                        <li>Produce sound effects and audio backgrounds</li>
+                    </ul>
+                    
+                    <h2 id="future-trends">Future AI Trends and Implications</h2>
+                    <p>The AI landscape evolves rapidly. Understanding emerging trends helps prepare for future opportunities and challenges.</p>
+                    
+                    <h3>Emerging AI Technologies</h3>
+                    <ul>
+                        <li><strong>Multimodal AI:</strong> Systems processing text, images, audio, and video simultaneously</li>
+                        <li><strong>Autonomous Agents:</strong> AI systems capable of independent task completion</li>
+                        <li><strong>Specialized Models:</strong> Industry-specific AI tools for healthcare, finance, education</li>
+                        <li><strong>Edge AI:</strong> AI processing on local devices for privacy and speed</li>
+                    </ul>
+                    
+                    <h3>Workplace Transformation</h3>
+                    <p>AI will reshape professional landscapes:</p>
+                    <ul>
+                        <li>Routine tasks increasingly automated</li>
+                        <li>Emphasis on creative and strategic thinking</li>
+                        <li>New hybrid roles combining human insight with AI capabilities</li>
+                        <li>Continuous learning and adaptation become essential skills</li>
+                    </ul>
+                    
+                    <h3>Preparing for AI Integration</h3>
+                    <ul>
+                        <li>Develop AI literacy and tool proficiency</li>
+                        <li>Focus on uniquely human skills (creativity, empathy, complex reasoning)</li>
+                        <li>Stay updated with AI developments in your industry</li>
+                        <li>Experiment with new AI tools and applications regularly</li>
+                    </ul>
+                    
+                    <p>The AI revolution is not a distant future – it's happening now. Those who embrace and master these tools will have significant advantages in the evolving digital landscape. Start experimenting with AI today and discover how it can transform your work and creative processes.</p>
                 `
             },
             {
                 id: 6,
-                title: "Sustainable Gaming Technology",
-                category: "Sustainability",
-                excerpt: "Environmental innovations in gaming hardware and software development for a greener digital future, featuring energy-efficient processing and eco-friendly practices.",
+                title: "Spotify Hidden Features: Ultimate Music Guide",
+                category: "Music",
+                excerpt: "Unlock Spotify's full potential with hidden features, advanced search techniques, and optimization tips for the ultimate music streaming experience.",
                 date: "January 3, 2025",
-                author: "Emma Watson",
-                readTime: "8 min read",
+                author: "Music Tech Expert",
+                readTime: "7 min read",
                 content: `
-                    <p>The gaming industry is embracing environmental responsibility, developing innovative technologies that deliver stunning experiences while minimizing ecological impact. From quantum-efficient processors to carbon-neutral cloud gaming, the future of entertainment is green.</p>
+                    <p>Spotify offers far more than basic music streaming. Hidden beneath its familiar interface are powerful features that can transform your listening experience. This guide reveals advanced techniques used by music industry professionals and audiophiles.</p>
                     
-                    <h2>Energy-Efficient Quantum Processing</h2>
-                    <p>Quantum gaming processors operate at near-absolute zero temperatures, dramatically reducing energy consumption while providing unprecedented computational power. These systems can process complex graphics and AI calculations using a fraction of traditional energy requirements.</p>
+                    <h2>Advanced Search Techniques</h2>
+                    <p>Spotify's search function includes powerful operators that most users never discover. These techniques allow precise music discovery and playlist curation.</p>
                     
-                    <h3>Renewable Energy Gaming Centers</h3>
-                    <p>Next-generation gaming data centers run entirely on renewable energy sources, with solar panels, wind turbines, and geothermal systems powering global gaming networks. Many facilities achieve negative carbon footprints through innovative energy capture and storage systems.</p>
-                    
-                    <blockquote>"Sustainable gaming isn't just about reducing environmental impact – it's about creating technologies that harmonize with natural systems while delivering extraordinary digital experiences." - Dr. James Mitchell, Green Computing Initiative</blockquote>
-                    
-                    <h2>Biodegradable Gaming Hardware</h2>
-                    <p>Revolutionary materials science has produced gaming controllers and components from biodegradable polymers and recycled materials. These devices perform identically to traditional hardware while breaking down harmlessly when disposed of properly.</p>
-                    
-                    <h3>Carbon-Negative Game Development</h3>
-                    <p>Development studios now operate as carbon sinks, using renewable energy and carbon capture technologies to remove more greenhouse gases from the atmosphere than they produce. Many games include environmental themes that educate players about sustainability.</p>
-                    
+                    <h3>Search Operators</h3>
+                    <p>Use these advanced search commands for precise results:</p>
                     <ul>
-                        <li>Solar-powered portable gaming devices</li>
-                        <li>Cloud gaming with zero-emission data centers</li>
-                        <li>Recycling programs for gaming hardware</li>
-                        <li>Virtual environments that teach ecological principles</li>
+                        <li><strong>year:</strong> Find music from specific years (e.g., "year:1985-1990")</li>
+                        <li><strong>genre:</strong> Search within specific genres (e.g., "genre:jazz")</li>
+                        <li><strong>label:</strong> Find music from specific record labels</li>
+                        <li><strong>hipster:</strong> Discover lesser-known tracks</li>
+                        <li><strong>new:</strong> Find recently added music</li>
                     </ul>
                     
-                    <h2>Circular Economy Gaming</h2>
-                    <p>Gaming companies are adopting circular economy principles, designing products for complete recyclability and offering trade-in programs that ensure no gaming hardware ends up in landfills. Digital game distribution eliminates physical packaging waste entirely.</p>
+                    <h3>Audio Feature Searches</h3>
+                    <p>Search by musical characteristics:</p>
+                    <ul>
+                        <li><strong>Tempo:</strong> Find songs by BPM range</li>
+                        <li><strong>Energy:</strong> High or low energy tracks</li>
+                        <li><strong>Mood:</strong> Happy, sad, aggressive, chill</li>
+                        <li><strong>Instrumentalness:</strong> Vocal vs. instrumental preferences</li>
+                    </ul>
                     
-                    <h3>Environmental Impact Tracking</h3>
-                    <p>Players can monitor their gaming's environmental impact through real-time dashboards showing energy consumption, carbon footprint, and sustainability metrics. Gamification elements reward eco-friendly gaming habits and renewable energy usage.</p>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-search"></i> Power Search Example</h4>
+                        <p>Try searching: "genre:electronic year:2020-2025 energy:high" to find recent high-energy electronic music.</p>
+                    </div>
                     
-                    <p>Sustainable gaming technology proves that environmental responsibility and cutting-edge entertainment aren't mutually exclusive – they're complementary forces driving innovation toward a more sustainable digital future.</p>
+                    <h2>Playlist Optimization Secrets</h2>
+                    <p>Creating engaging playlists requires understanding Spotify's algorithm and user psychology. Professional playlist curators use specific strategies to maximize engagement.</p>
+                    
+                    <h3>Algorithm-Friendly Structure</h3>
+                    <ul>
+                        <li>Start with recognizable tracks to hook listeners</li>
+                        <li>Include 2-3 popular songs per 10 tracks</li>
+                        <li>Maintain consistent energy flow throughout</li>
+                        <li>End with memorable tracks to encourage replays</li>
+                    </ul>
+                    
+                    <h3>Collaborative Playlist Strategies</h3>
+                    <p>Leverage collaborative features for community building:</p>
+                    <ul>
+                        <li>Enable collaborative mode for friend contributions</li>
+                        <li>Set contribution guidelines in playlist descriptions</li>
+                        <li>Regularly curate and organize collaborative additions</li>
+                        <li>Use collaborative playlists for event planning</li>
+                    </ul>
+                    
+                    <blockquote>"The best playlists tell stories. Each song should flow naturally into the next, creating an emotional journey for the listener." - Professional Music Curator</blockquote>
+                    
+                    <h2>Discovery and Recommendation Hacks</h2>
+                    <p>Spotify's recommendation system can be optimized to discover music perfectly tailored to your preferences.</p>
+                    
+                    <h3>Training Your Algorithm</h3>
+                    <ul>
+                        <li>Use the like/dislike buttons consistently</li>
+                        <li>Skip tracks you don't enjoy completely</li>
+                        <li>Listen to full songs you enjoy</li>
+                        <li>Explore artist radio stations regularly</li>
+                        <li>Create diverse playlists to expand recommendations</li>
+                    </ul>
+                    
+                    <h3>Hidden Discovery Features</h3>
+                    <p>Access lesser-known discovery tools:</p>
+                    <ul>
+                        <li><strong>Discover Weekly Archives:</strong> Access past Discover Weekly playlists</li>
+                        <li><strong>Genre Playlists:</strong> Explore curated genre-specific collections</li>
+                        <li><strong>Mood Playlists:</strong> Context-based music for activities</li>
+                        <li><strong>Artist Influences:</strong> Discover artists that influenced your favorites</li>
+                    </ul>
+                    
+                    <h2>Audio Quality and Technical Optimization</h2>
+                    <p>Maximize your listening experience with audio quality settings and technical configurations.</p>
+                    
+                    <h3>Audio Quality Settings</h3>
+                    <ul>
+                        <li><strong>Premium Quality:</strong> 320 kbps for best audio experience</li>
+                        <li><strong>Data Management:</strong> Adjust quality based on connection type</li>
+                        <li><strong>Download Settings:</strong> Optimize offline listening quality</li>
+                        <li><strong>Crossfade:</strong> Smooth transitions between tracks</li>
+                    </ul>
+                    
+                    <h3>Device-Specific Optimizations</h3>
+                    <p>Configure Spotify for different listening environments:</p>
+                    <ul>
+                        <li>Enable volume normalization for consistent playback</li>
+                        <li>Configure equalizer settings for your headphones</li>
+                        <li>Set up Spotify Connect for multi-room audio</li>
+                        <li>Optimize battery usage on mobile devices</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-headphones"></i> Audio Quality Note</h4>
+                        <p>High-quality audio requires premium subscription and appropriate hardware. Invest in good headphones or speakers to fully appreciate enhanced audio settings.</p>
+                    </div>
+                    
+                    <h2>Social Features and Sharing</h2>
+                    <p>Spotify's social features enhance music discovery and community building around shared musical interests.</p>
+                    
+                    <h3>Advanced Sharing Options</h3>
+                    <ul>
+                        <li>Share specific song timestamps for precise moments</li>
+                        <li>Create custom playlist covers for visual appeal</li>
+                        <li>Use Spotify Codes for easy mobile sharing</li>
+                        <li>Share listening activity with friends selectively</li>
+                    </ul>
+                    
+                    <h3>Community Engagement</h3>
+                    <p>Connect with other music enthusiasts:</p>
+                    <ul>
+                        <li>Follow artists for updates and releases</li>
+                        <li>Join collaborative playlists in music communities</li>
+                        <li>Participate in playlist challenges and themes</li>
+                        <li>Share music on social platforms with proper formatting</li>
+                    </ul>
+                    
+                    <h2>Productivity and Lifestyle Integration</h2>
+                    <p>Integrate Spotify into daily routines and productivity workflows for enhanced life experiences.</p>
+                    
+                    <h3>Routine-Based Playlists</h3>
+                    <ul>
+                        <li><strong>Morning Energy:</strong> Upbeat tracks for workout and commute</li>
+                        <li><strong>Focus Music:</strong> Instrumental and ambient for deep work</li>
+                        <li><strong>Evening Wind-down:</strong> Relaxing music for stress relief</li>
+                        <li><strong>Social Gatherings:</strong> Crowd-pleasing tracks for events</li>
+                    </ul>
+                    
+                    <h3>Smart Device Integration</h3>
+                    <ul>
+                        <li>Configure voice commands for hands-free control</li>
+                        <li>Set up automatic playlist switching based on time</li>
+                        <li>Use Spotify with smart home systems</li>
+                        <li>Create location-based playlist triggers</li>
+                    </ul>
+                    
+                    <p>Spotify's hidden features transform it from a simple streaming service into a comprehensive music ecosystem. Experiment with these advanced techniques to create a personalized listening experience that grows more sophisticated over time. Remember, the best music discovery happens when you actively engage with the platform's full capabilities.</p>
                 `
             }
         ];
@@ -1276,15 +1998,22 @@
         function initializeBlogViewer() {
             // Get blog ID from URL parameters if available
             const urlParams = new URLSearchParams(window.location.search);
-            const blogId = urlParams.get('id');
-            
-            if (blogId) {
-                const blogIndex = blogPosts.findIndex(blog => blog.id === parseInt(blogId));
+            let blogIdParam = urlParams.get('id');
+
+            if (blogIdParam) {
+                // Support both numeric IDs and slug format like blog-post-3
+                if (isNaN(blogIdParam)) {
+                    const match = blogIdParam.match(/blog-post-(\d+)/i);
+                    if (match) {
+                        blogIdParam = match[1];
+                    }
+                }
+                const blogIndex = blogPosts.findIndex(blog => blog.id === parseInt(blogIdParam));
                 if (blogIndex !== -1) {
                     currentBlogIndex = blogIndex;
                 }
             }
-            
+
             loadBlog(currentBlogIndex);
             updateRelatedPosts();
         }
@@ -1304,15 +2033,15 @@
                         <h1 class="blog-title">${blog.title}</h1>
                         <div class="blog-meta">
                             <div class="meta-item">
-                                <i class="fas fa-calendar-alt holographic"></i>
+                                <i class="fas fa-calendar-alt"></i>
                                 <span>${blog.date}</span>
                             </div>
                             <div class="meta-item">
-                                <i class="fas fa-user holographic"></i>
+                                <i class="fas fa-user"></i>
                                 <span>${blog.author}</span>
                             </div>
                             <div class="meta-item">
-                                <i class="fas fa-clock holographic"></i>
+                                <i class="fas fa-clock"></i>
                                 <span>${blog.readTime}</span>
                             </div>
                         </div>
@@ -1421,17 +2150,18 @@
 
         // Share functions
         function shareToWhatsapp() {
-    const currentBlog = blogPosts[currentBlogIndex];
-    const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(currentBlog.title);
-    window.open(`https://api.whatsapp.com/send?text=${title}%20${url}`, '_blank');
-}
-
+            const currentBlog = blogPosts[currentBlogIndex];
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(
+                `📖 ${currentBlog.title}\n\n${currentBlog.excerpt}\n\nRead the full article:`
+            );
+            window.open(`https://api.whatsapp.com/send?text=${title}%20${url}`, '_blank');
+        }
 
         function shareToTwitter() {
             const currentBlog = blogPosts[currentBlogIndex];
             const url = encodeURIComponent(window.location.href);
-            const title = encodeURIComponent(`${currentBlog.title} - GameHub Blog`);
+            const title = encodeURIComponent(`${currentBlog.title} - App Hub Blog`);
             window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
         }
 
@@ -1441,25 +2171,23 @@
         }
 
         function copyToClipboard() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                // Show success message
-                const copyBtn = document.querySelector('.share-btn.copy span');
-                if (copyBtn) {
-                    const originalText = copyBtn.textContent;
-                    copyBtn.textContent = 'Copied! ✅';
-                    setTimeout(() => {
-                        copyBtn.textContent = originalText;
-                    }, 2000);
-                }
+            const currentBlog = blogPosts[currentBlogIndex];
+            const textToCopy = `${currentBlog.title}\n\n${currentBlog.excerpt}\n\nRead more: ${window.location.href}`;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess();
             }).catch(() => {
                 // Fallback for browsers that don't support clipboard API
                 const textArea = document.createElement('textarea');
-                textArea.value = window.location.href;
+                textArea.value = textToCopy;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
-                
+                showCopySuccess();
+            });
+
+            function showCopySuccess() {
                 const copyBtn = document.querySelector('.share-btn.copy span');
                 if (copyBtn) {
                     const originalText = copyBtn.textContent;
@@ -1468,7 +2196,7 @@
                         copyBtn.textContent = originalText;
                     }, 2000);
                 }
-            });
+            }
         }
 
         function showLoading(show) {
@@ -1484,16 +2212,62 @@
             }
         }
 
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
+        const crossIcon = mobileMenuBtn.querySelector('.cross-icon');
+        
         function setupEventListeners() {
-            // Mobile menu
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                
+                if (mobileMenu.classList.contains('active')) {
+                    hamburgerIcon.style.opacity = '0';
+                    crossIcon.style.opacity = '1';
+                } else {
+                    hamburgerIcon.style.opacity = '1';
+                    crossIcon.style.opacity = '0';
+                }
+            });
             
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('show');
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('#mobile-menu a[href^="#"], #mobile-menu a[href^="index.html"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    hamburgerIcon.style.opacity = '1';
+                    crossIcon.style.opacity = '0';
                 });
-            }
+            });
+            
+            // Mobile dropdown functionality
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const dropdown = btn.closest('.mobile-dropdown');
+                    const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                    const icon = btn.querySelector('i');
+                    
+                    document.querySelectorAll('.mobile-dropdown').forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherMenu = otherDropdown.querySelector('.mobile-dropdown-menu');
+                            const otherIcon = otherDropdown.querySelector('i');
+                            if (otherMenu && otherIcon) {
+                                otherMenu.classList.add('hidden');
+                                otherIcon.style.transform = 'rotate(0deg)';
+                            }
+                        }
+                    });
+                    
+                    if (menu.classList.contains('hidden')) {
+                        menu.classList.remove('hidden');
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        menu.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
 
             // Keyboard navigation
             document.addEventListener('keydown', function(e) {
@@ -1502,8 +2276,10 @@
                 } else if (e.key === 'ArrowRight') {
                     navigateBlog(1);
                 } else if (e.key === 'Escape') {
-                    if (mobileMenu && mobileMenu.classList.contains('show')) {
-                        mobileMenu.classList.remove('show');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        hamburgerIcon.style.opacity = '1';
+                        crossIcon.style.opacity = '0';
                     }
                 }
             });
@@ -1513,7 +2289,9 @@
                 if (mobileMenuBtn && mobileMenu && 
                     !mobileMenuBtn.contains(e.target) && 
                     !mobileMenu.contains(e.target)) {
-                    mobileMenu.classList.remove('show');
+                    mobileMenu.classList.remove('active');
+                    hamburgerIcon.style.opacity = '1';
+                    crossIcon.style.opacity = '0';
                 }
             });
         }
@@ -1524,17 +2302,7 @@
             function updateScrollEffects() {
                 if (!ticking) {
                     requestAnimationFrame(() => {
-                        const scrollY = window.scrollY;
-                        const navbar = document.getElementById('navbar');
-                        
-                        if (navbar) {
-                            if (scrollY > 50) {
-                                navbar.classList.add('scrolled');
-                            } else {
-                                navbar.classList.remove('scrolled');
-                            }
-                        }
-                        
+                        // Add any scroll-based animations here
                         ticking = false;
                     });
                     ticking = true;
@@ -1544,7 +2312,7 @@
             window.addEventListener('scroll', updateScrollEffects, { passive: true });
         }
 
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1556,6 +2324,40 @@
                     });
                 }
             });
+        });
+
+        // Enhanced dropdown functionality
+        let dropdownTimeouts = new Map();
+
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            function showDropdown() {
+                if (dropdownTimeouts.has(dropdown)) {
+                    clearTimeout(dropdownTimeouts.get(dropdown));
+                    dropdownTimeouts.delete(dropdown);
+                }
+                dropdown.classList.add('active');
+            }
+            
+            function hideDropdown() {
+                const timeout = setTimeout(() => {
+                    dropdown.classList.remove('active');
+                    dropdownTimeouts.delete(dropdown);
+                }, 500);
+                
+                dropdownTimeouts.set(dropdown, timeout);
+            }
+            
+            dropdown.addEventListener('mouseenter', showDropdown);
+            if (menu) {
+                menu.addEventListener('mouseenter', showDropdown);
+            }
+            
+            dropdown.addEventListener('mouseleave', hideDropdown);
+            if (menu) {
+                menu.addEventListener('mouseleave', hideDropdown);
+            }
         });
     </script>
 </body>
